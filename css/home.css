@@ -84,19 +84,33 @@
   grid-auto-flow: column;
   gap: 12px;
   overflow-x: auto;
+  overflow-y: hidden;
   padding: 0 24px 7px 0;
   margin-right: -24px;
   scrollbar-width: none;
   scroll-snap-type: x mandatory;
+  scroll-padding-inline: 0 24px;
+  overscroll-behavior-inline: contain;
+  touch-action: pan-x;
+  -webkit-overflow-scrolling: touch;
 }
 
 .product-card {
+  display: block;
   overflow: hidden;
   border: 1px solid #f1f1f1;
   border-radius: 8px;
   background: #fff;
   box-shadow: var(--shadow-card);
+  color: inherit;
+  cursor: pointer;
   scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.product-card:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 3px;
 }
 
 .product-card__media {
