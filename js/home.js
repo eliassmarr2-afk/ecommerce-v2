@@ -108,16 +108,22 @@
   }
 
   function productCard(product) {
+    const productUrl = `producto.html?id=${encodeURIComponent(product.id)}`;
+
     return `
-      <article class="product-card">
-        <a class="product-card__media" href="producto.html?id=${encodeURIComponent(product.id)}" aria-label="Ver ${product.title}">
+      <a
+        class="product-card"
+        href="${productUrl}"
+        aria-label="Ver ${product.title}"
+      >
+        <div class="product-card__media">
           <img class="product-card__image" src="${product.image}" alt="${product.title}" loading="lazy" />
           <span class="product-card__badge">${product.badge}</span>
           <span class="product-card__heart">${heartSvg()}</span>
-        </a>
+        </div>
 
         <div class="product-card__body">
-          <a class="product-card__title" href="producto.html?id=${encodeURIComponent(product.id)}">${product.title}</a>
+          <span class="product-card__title">${product.title}</span>
 
           <div class="product-card__meta">
             <span class="meta-item">${truckSvg()} ${product.deliveryDays <= 1 ? "Despacho hoy" : product.deliveryDays + " días"}</span>
@@ -136,7 +142,7 @@
             </div>
           </div>
         </div>
-      </article>
+      </a>
     `;
   }
 
@@ -176,7 +182,7 @@
 
   function renderProducts() {
     const filtered = getFilteredProducts();
-    const featured = filtered.slice(0, 4);
+    const featured = filtered.slice(0, 3);
     const ranked = [...filtered]
       .sort((a, b) => b.buyers - a.buyers)
       .slice(0, 3);
