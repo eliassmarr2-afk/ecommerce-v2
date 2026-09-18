@@ -3,127 +3,110 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#2f5d46" />
+  <meta name="theme-color" content="#ffffff" />
   <meta name="description" content="The Camping — equipamiento para camping, verano y escapadas." />
   <title>The Camping</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/base.css" />
   <link rel="stylesheet" href="css/home.css" />
 </head>
-<body>
+<body class="home-page">
   <div class="app-shell">
-    <header class="site-header">
+    <header class="home-header">
       <div class="location-row">
-        <div>
-          <span class="eyebrow">Tu ubicación</span>
+        <div class="location-copy">
+          <span class="micro-label">Ubicación</span>
           <button class="location-button" type="button" aria-label="Cambiar ubicación">
-            <span class="location-pin" aria-hidden="true">●</span>
+            <span class="pin-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/><circle cx="12" cy="10" r="2.2"/></svg>
+            </span>
             <span>Buenos Aires, Argentina</span>
-            <span aria-hidden="true">⌄</span>
+            <svg class="chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m7 9 5 5 5-5"/></svg>
           </button>
         </div>
-        <button class="icon-button" type="button" aria-label="Notificaciones">
-          <span aria-hidden="true">♢</span>
-        </button>
-      </div>
 
-      <div class="brand-row">
-        <div>
-          <p class="brand-kicker">THE CAMPING</p>
-          <h1>Tu próxima escapada empieza acá.</h1>
-        </div>
+        <button class="notification-button" type="button" aria-label="Notificaciones">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/></svg>
+          <span class="notification-dot" aria-hidden="true"></span>
+        </button>
       </div>
 
       <div class="search-row">
         <label class="search-box">
-          <span aria-hidden="true">⌕</span>
-          <input id="searchInput" type="search" placeholder="Buscar carpas, sillas, pesca..." autocomplete="off" />
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+          <input id="searchInput" type="search" placeholder="Buscar productos, categorías..." autocomplete="off" />
         </label>
-        <button id="filterButton" class="filter-button" type="button" aria-label="Abrir filtros">☷</button>
+
+        <button id="filterButton" class="filter-button" type="button" aria-label="Abrir filtros">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M4 7h10"/><path d="M18 7h2"/><circle cx="16" cy="7" r="2"/>
+            <path d="M4 17h2"/><path d="M10 17h10"/><circle cx="8" cy="17" r="2"/>
+          </svg>
+        </button>
       </div>
     </header>
 
-    <main>
-      <section class="section-block categories-section" aria-labelledby="categoriesTitle">
+    <main class="home-main">
+      <section class="categories-section" aria-labelledby="categoriesTitle">
         <div class="section-heading">
-          <div>
-            <span class="eyebrow">Explorá por categoría</span>
-            <h2 id="categoriesTitle">Categorías</h2>
-          </div>
-          <button id="resetCategories" class="text-button" type="button">Ver todo</button>
+          <h2 id="categoriesTitle">Categorías</h2>
+          <button id="resetCategories" class="see-all-button" type="button">Ver todas</button>
         </div>
-        <div id="categoriesTrack" class="categories-track" aria-label="Categorías de productos"></div>
+        <div id="categoriesTrack" class="categories-track" aria-label="Categorías"></div>
       </section>
 
-      <section class="hero-card">
-        <div class="hero-copy">
-          <span class="hero-badge">ESCAPADA DE FINDE</span>
-          <h2>Armá el plan.<br />Nosotros ponemos el equipo.</h2>
-          <p>Combos prácticos para salir sin perder tiempo comparando pieza por pieza.</p>
-          <button class="hero-cta" type="button" data-category-jump="combos">Ver combos</button>
-        </div>
-        <div class="hero-art" aria-hidden="true">
-          <span>⛺</span>
-        </div>
-      </section>
-
-      <section class="section-block" aria-labelledby="featuredTitle">
+      <section class="products-section" aria-labelledby="featuredTitle">
         <div class="section-heading">
-          <div>
-            <span class="eyebrow">Selección The Camping</span>
-            <h2 id="featuredTitle">Para tu próxima salida</h2>
-          </div>
-          <span id="resultsCount" class="results-count"></span>
+          <h2 id="featuredTitle">Destacados</h2>
+          <button class="see-all-button" type="button" data-reset-view>Ver todos</button>
         </div>
-        <div id="productsGrid" class="products-grid"></div>
-        <div id="emptyState" class="empty-state" hidden>
-          <div class="empty-icon">⌕</div>
-          <h3>No encontramos productos</h3>
-          <p>Probá con otra búsqueda o quitá los filtros.</p>
-          <button id="clearFilters" class="primary-button" type="button">Limpiar filtros</button>
-        </div>
+        <div id="productsGrid" class="product-rail"></div>
       </section>
 
-      <section class="section-block benefits-section" aria-label="Beneficios">
-        <article class="benefit-card">
-          <span class="benefit-icon">↗</span>
-          <div>
-            <strong>Envíos rápidos</strong>
-            <p>Estimación visible antes de comprar.</p>
-          </div>
-        </article>
-        <article class="benefit-card">
-          <span class="benefit-icon">★</span>
-          <div>
-            <strong>Productos elegidos</strong>
-            <p>Selección simple, útil y lista para salir.</p>
-          </div>
-        </article>
+      <section class="products-section nearby-section" aria-labelledby="nearbyTitle">
+        <div class="section-heading">
+          <h2 id="nearbyTitle">Más elegidos</h2>
+          <button class="see-all-button" type="button" data-category-jump="combos">Ver combos</button>
+        </div>
+        <div id="nearbyGrid" class="nearby-list"></div>
       </section>
+
+      <div id="emptyState" class="empty-state" hidden>
+        <div class="empty-state__icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.6-3.6"/></svg>
+        </div>
+        <h3>No encontramos productos</h3>
+        <p>Probá con otra búsqueda o quitá los filtros.</p>
+        <button id="clearFilters" class="primary-button" type="button">Limpiar filtros</button>
+      </div>
     </main>
 
     <nav class="bottom-nav" aria-label="Navegación principal">
       <a class="bottom-nav__item is-active" href="index.html" aria-current="page">
-        <span class="bottom-nav__icon">⌂</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
         <span>Inicio</span>
       </a>
+
       <button class="bottom-nav__item" type="button" data-placeholder-tab="Novedades">
-        <span class="bottom-nav__icon">✦</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.1 5.1L19 10l-4.9 1.9L12 17l-2.1-5.1L5 10l4.9-1.9L12 3Z"/></svg>
         <span>Novedades</span>
       </button>
+
       <button class="bottom-nav__item cart-nav-item" type="button" data-placeholder-tab="Carrito">
-        <span class="bottom-nav__icon">▢</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l-1 12H6L5 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
         <span>Carrito</span>
         <span class="cart-count" id="cartCount">0</span>
       </button>
+
       <button class="bottom-nav__item" type="button" data-category-jump="combos">
-        <span class="bottom-nav__icon">◇</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v11H4z"/><path d="M8 8V5h8v3"/><path d="M9 13h6"/></svg>
         <span>Combos</span>
       </button>
+
       <button class="bottom-nav__item" type="button" data-placeholder-tab="Ingresar">
-        <span class="bottom-nav__icon">○</span>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
         <span>Ingresar</span>
       </button>
     </nav>
@@ -133,11 +116,8 @@
     <section class="filter-sheet" role="dialog" aria-modal="true" aria-labelledby="filterTitle">
       <div class="sheet-handle"></div>
       <div class="sheet-heading">
-        <div>
-          <span class="eyebrow">Refiná la búsqueda</span>
-          <h2 id="filterTitle">Filtros</h2>
-        </div>
-        <button id="closeFilters" class="icon-button" type="button" aria-label="Cerrar filtros">×</button>
+        <h2 id="filterTitle">Filtros</h2>
+        <button id="closeFilters" class="sheet-close" type="button" aria-label="Cerrar filtros">×</button>
       </div>
 
       <fieldset class="filter-group">
@@ -155,7 +135,7 @@
         <label class="toggle-row">
           <span>
             <strong>Entrega rápida</strong>
-            <small>Mostrar productos con despacho estimado de hasta 48 h.</small>
+            <small>Hasta 48 h estimadas.</small>
           </span>
           <input id="fastDeliveryFilter" type="checkbox" />
         </label>
@@ -163,7 +143,7 @@
 
       <div class="sheet-actions">
         <button id="resetFilters" class="secondary-button" type="button">Restablecer</button>
-        <button id="applyFilters" class="primary-button" type="button">Aplicar filtros</button>
+        <button id="applyFilters" class="primary-button" type="button">Aplicar</button>
       </div>
     </section>
   </div>
