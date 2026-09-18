@@ -111,15 +111,16 @@
     const productUrl = `producto.html?id=${encodeURIComponent(product.id)}`;
 
     return `
-      <a
+      <button
         class="product-card"
-        href="${productUrl}"
-        aria-label="Ver ${product.title}"
+        type="button"
+        data-product-url="${productUrl}"
+        aria-label="Abrir ${product.title}"
       >
         <div class="product-card__media">
-          <img class="product-card__image" src="${product.image}" alt="${product.title}" loading="lazy" />
+          <img class="product-card__image" src="${product.image}" alt="${product.title}" loading="lazy" draggable="false" />
           <span class="product-card__badge">${product.badge}</span>
-          <span class="product-card__heart">${heartSvg()}</span>
+          <span class="product-card__heart" aria-hidden="true">${heartSvg()}</span>
         </div>
 
         <div class="product-card__body">
@@ -142,7 +143,7 @@
             </div>
           </div>
         </div>
-      </a>
+      </button>
     `;
   }
 
@@ -189,6 +190,12 @@
 
     els.productsGrid.innerHTML = featured.map(productCard).join("");
     els.nearbyGrid.innerHTML = ranked.map(nearbyCard).join("");
+
+    els.productsGrid.querySelectorAll("[data-product-url]").forEach((card) => {
+      card.addEventListener("click", () => {
+        window.location.assign(card.dataset.productUrl);
+      });
+    });
 
     const hasProducts = filtered.length > 0;
     els.productsGrid.closest(".products-section").hidden = !hasProducts;
@@ -309,6 +316,36 @@
     renderProducts();
     updateCartCount();
     wireEvents();
+
+    let mouseDown = false;
+    let startX = 0;
+    let startScrollLeft = 0;
+
+    els.productsGrid.addEventListener("mousedown", (event) => {
+      mouseDown = true;
+      startX = event.clientX;
+      startScrollLeft = els.productsGrid.scrollLeft;
+    });
+
+    window.addEventListener("mouseup", () => {
+      mouseDown = false;
+    });
+
+    els.productsGrid.addEventListener("mouseleave", () => {
+      mouseDown = false;
+    });
+
+    els.productsGrid.addEventListener("mousemove", (event) => {
+      if (!mouseDown) return;
+      event.preventDefault();
+      els.productsGrid.scrollLeft = startScrollLeft - (event.clientX - startX);
+    });
+
+    els.productsGrid.addEventListener("wheel", (event) => {
+      if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+      event.preventDefault();
+      els.productsGrid.scrollLeft += event.deltaY;
+    }, { passive: false });
   }
 
   init();
