@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#2f5d46" />
+  <meta name="description" content="The Camping — equipamiento para camping, verano y escapadas." />
+  <title>The Camping</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="site-header">
+      <div class="location-row">
+        <div>
+          <span class="eyebrow">Tu ubicación</span>
+          <button class="location-button" type="button" aria-label="Cambiar ubicación">
+            <span class="location-pin" aria-hidden="true">●</span>
+            <span>Buenos Aires, Argentina</span>
+            <span aria-hidden="true">⌄</span>
+          </button>
+        </div>
+        <button class="icon-button" type="button" aria-label="Notificaciones">
+          <span aria-hidden="true">♢</span>
+        </button>
+      </div>
+
+      <div class="brand-row">
+        <div>
+          <p class="brand-kicker">THE CAMPING</p>
+          <h1>Tu próxima escapada empieza acá.</h1>
+        </div>
+      </div>
+
+      <div class="search-row">
+        <label class="search-box">
+          <span aria-hidden="true">⌕</span>
+          <input id="searchInput" type="search" placeholder="Buscar carpas, sillas, pesca..." autocomplete="off" />
+        </label>
+        <button id="filterButton" class="filter-button" type="button" aria-label="Abrir filtros">☷</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="section-block categories-section" aria-labelledby="categoriesTitle">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">Explorá por categoría</span>
+            <h2 id="categoriesTitle">Categorías</h2>
+          </div>
+          <button id="resetCategories" class="text-button" type="button">Ver todo</button>
+        </div>
+        <div id="categoriesTrack" class="categories-track" aria-label="Categorías de productos"></div>
+      </section>
+
+      <section class="hero-card">
+        <div class="hero-copy">
+          <span class="hero-badge">ESCAPADA DE FINDE</span>
+          <h2>Armá el plan.<br />Nosotros ponemos el equipo.</h2>
+          <p>Combos prácticos para salir sin perder tiempo comparando pieza por pieza.</p>
+          <button class="hero-cta" type="button" data-category-jump="combos">Ver combos</button>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <span>⛺</span>
+        </div>
+      </section>
+
+      <section class="section-block" aria-labelledby="featuredTitle">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">Selección The Camping</span>
+            <h2 id="featuredTitle">Para tu próxima salida</h2>
+          </div>
+          <span id="resultsCount" class="results-count"></span>
+        </div>
+        <div id="productsGrid" class="products-grid"></div>
+        <div id="emptyState" class="empty-state" hidden>
+          <div class="empty-icon">⌕</div>
+          <h3>No encontramos productos</h3>
+          <p>Probá con otra búsqueda o quitá los filtros.</p>
+          <button id="clearFilters" class="primary-button" type="button">Limpiar filtros</button>
+        </div>
+      </section>
+
+      <section class="section-block benefits-section" aria-label="Beneficios">
+        <article class="benefit-card">
+          <span class="benefit-icon">↗</span>
+          <div>
+            <strong>Envíos rápidos</strong>
+            <p>Estimación visible antes de comprar.</p>
+          </div>
+        </article>
+        <article class="benefit-card">
+          <span class="benefit-icon">★</span>
+          <div>
+            <strong>Productos elegidos</strong>
+            <p>Selección simple, útil y lista para salir.</p>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="Navegación principal">
+      <a class="bottom-nav__item is-active" href="index.html" aria-current="page">
+        <span class="bottom-nav__icon">⌂</span>
+        <span>Inicio</span>
+      </a>
+      <button class="bottom-nav__item" type="button" data-placeholder-tab="Novedades">
+        <span class="bottom-nav__icon">✦</span>
+        <span>Novedades</span>
+      </button>
+      <button class="bottom-nav__item cart-nav-item" type="button" data-placeholder-tab="Carrito">
+        <span class="bottom-nav__icon">▢</span>
+        <span>Carrito</span>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+      <button class="bottom-nav__item" type="button" data-category-jump="combos">
+        <span class="bottom-nav__icon">◇</span>
+        <span>Combos</span>
+      </button>
+      <button class="bottom-nav__item" type="button" data-placeholder-tab="Ingresar">
+        <span class="bottom-nav__icon">○</span>
+        <span>Ingresar</span>
+      </button>
+    </nav>
+  </div>
+
+  <div id="filterSheet" class="sheet-backdrop" hidden>
+    <section class="filter-sheet" role="dialog" aria-modal="true" aria-labelledby="filterTitle">
+      <div class="sheet-handle"></div>
+      <div class="sheet-heading">
+        <div>
+          <span class="eyebrow">Refiná la búsqueda</span>
+          <h2 id="filterTitle">Filtros</h2>
+        </div>
+        <button id="closeFilters" class="icon-button" type="button" aria-label="Cerrar filtros">×</button>
+      </div>
+
+      <fieldset class="filter-group">
+        <legend>Precio máximo</legend>
+        <div class="price-options">
+          <button type="button" class="chip is-selected" data-price="all">Todos</button>
+          <button type="button" class="chip" data-price="50000">Hasta $50.000</button>
+          <button type="button" class="chip" data-price="100000">Hasta $100.000</button>
+          <button type="button" class="chip" data-price="200000">Hasta $200.000</button>
+        </div>
+      </fieldset>
+
+      <fieldset class="filter-group">
+        <legend>Entrega</legend>
+        <label class="toggle-row">
+          <span>
+            <strong>Entrega rápida</strong>
+            <small>Mostrar productos con despacho estimado de hasta 48 h.</small>
+          </span>
+          <input id="fastDeliveryFilter" type="checkbox" />
+        </label>
+      </fieldset>
+
+      <div class="sheet-actions">
+        <button id="resetFilters" class="secondary-button" type="button">Restablecer</button>
+        <button id="applyFilters" class="primary-button" type="button">Aplicar filtros</button>
+      </div>
+    </section>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/data/catalog.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>
