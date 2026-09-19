@@ -40,7 +40,24 @@
     readMoreButton: document.getElementById("readMoreButton"),
     galleryButton: document.querySelector(".gallery-pill"),
     detailSection: document.querySelector(".detail-section"),
-    toast: document.getElementById("toast")
+    toast: document.getElementById("toast"),
+    phoneSupportButton: document.querySelector('.seller-actions button[aria-label="Consultar por teléfono"]'),
+    productSupportButton: document.getElementById("productSupportButton"),
+    productSupportBackdrop: document.getElementById("productSupportBackdrop"),
+    productSupportSheet: document.getElementById("productSupportSheet"),
+    closeProductSupport: document.getElementById("closeProductSupport"),
+    closeProductSupportSuccess: document.getElementById("closeProductSupportSuccess"),
+    productSupportFormView: document.getElementById("productSupportFormView"),
+    productSupportSuccessView: document.getElementById("productSupportSuccessView"),
+    productSupportForm: document.getElementById("productSupportForm"),
+    productSupportName: document.getElementById("productSupportName"),
+    productSupportEmail: document.getElementById("productSupportEmail"),
+    productSupportNameError: document.getElementById("productSupportNameError"),
+    productSupportEmailError: document.getElementById("productSupportEmailError"),
+    supportProductImage: document.getElementById("supportProductImage"),
+    supportProductTitle: document.getElementById("supportProductTitle"),
+    supportProductPrice: document.getElementById("supportProductPrice"),
+    supportSuccessProductTitle: document.getElementById("supportSuccessProductTitle")
   };
 
   function showToast(message) {
@@ -107,6 +124,128 @@
     showToast(`${product.title} agregado al carrito.`);
   }
 
+  function setProductSupportError(input, errorEl, message) {
+    const hasError = Boolean(message);
+    input.setAttribute("aria-invalid", hasError ? "true" : "false");
+    errorEl.hidden = !hasError;
+    errorEl.textContent = message || "";
+  }
+
+  function resetProductSupportSheet() {
+    els.productSupportForm.reset();
+    setProductSupportError(els.productSupportName, els.productSupportNameError, "");
+    setProductSupportError(els.productSupportEmail, els.productSupportEmailError, "");
+    els.productSupportFormView.hidden = false;
+    els.productSupportSuccessView.hidden = true;
+  }
+
+  function openProductSupport() {
+    resetProductSupportSheet();
+
+    els.supportProductImage.src = product.image;
+    els.supportProductImage.alt = product.title;
+    els.supportProductTitle.textContent = product.title;
+    els.supportProductPrice.textContent = money.format(product.price);
+    els.supportSuccessProductTitle.textContent = product.title;
+
+    els.productSupportBackdrop.hidden = false;
+    requestAnimationFrame(() => {
+      els.productSupportBackdrop.classList.add("is-open");
+    });
+
+    document.body.classList.add("no-scroll");
+  }
+
+  function closeProductSupport() {
+    els.productSupportBackdrop.classList.remove("is-open");
+    document.body.classList.remove("no-scroll");
+
+    window.setTimeout(() => {
+      if (!els.productSupportBackdrop.classList.contains("is-open")) {
+        els.productSupportBackdrop.hidden = true;
+      }
+    }, 190);
+  }
+
+  function validateProductSupport() {
+    const name = els.productSupportName.value.trim();
+    const email = els.productSupportEmail.value.trim();
+    let valid = true;
+
+    if (name.length < 3) {
+      setProductSupportError(
+        els.productSupportName,
+        els.productSupportNameError,
+        "Ingresá tu nombre y apellido."
+      );
+      valid = false;
+    } else {
+      setProductSupportError(els.productSupportName, els.productSupportNameError, "");
+    }
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setProductSupportError(
+        els.productSupportEmail,
+        els.productSupportEmailError,
+        "Ingresá un correo válido."
+      );
+      valid = false;
+    } else {
+      setProductSupportError(els.productSupportEmail, els.productSupportEmailError, "");
+    }
+
+    return valid;
+  }
+
+  function buildProductSupportIntent() {
+    return {
+      type: "product_inquiry",
+      entrySurface: "product_detail",
+      customer: {
+        name: els.productSupportName.value.trim(),
+        email: els.productSupportEmail.value.trim()
+      },
+      product: {
+        id: product.id,
+        title: product.title,
+        category: product.category,
+        price: product.price,
+        image: product.image
+      },
+      source: {
+        url: window.location.href
+      }
+    };
+  }
+
+  function handleProductSupportSubmit(event) {
+    event.preventDefault();
+
+    if (!validateProductSupport()) {
+      return;
+    }
+
+    const supportIntent = buildProductSupportIntent();
+
+    /*
+     * Future Protocol Data V2 seam:
+     * support.startContextualChat(supportIntent)
+     *
+     * Protocol Data will receive:
+     * - type = product_inquiry
+     * - customer name/email
+     * - exact product context
+     * - entry surface / source URL
+     *
+     * The backend must generate the opaque chat token and send the email.
+     * V1 deliberately performs no network call and creates no token.
+     */
+    void supportIntent;
+
+    els.productSupportFormView.hidden = true;
+    els.productSupportSuccessView.hidden = false;
+  }
+
   function wireEvents() {
     els.addToCart.addEventListener("click", addToCart);
 
@@ -155,11 +294,34 @@
       showToast("La galería completa se incorporará en la siguiente fase.");
     });
 
-    document.querySelectorAll(".seller-actions button").forEach((button) => {
-      button.addEventListener("click", () => {
-        showToast("Canal de contacto preparado para futura integración.");
-      });
+    els.phoneSupportButton.addEventListener("click", () => {
+      showToast("El canal telefónico se conectará en una fase posterior.");
     });
+
+    els.productSupportButton.addEventListener("click", openProductSupport);
+
+    els.closeProductSupport.addEventListener("click", closeProductSupport);
+    els.closeProductSupportSuccess.addEventListener("click", closeProductSupport);
+
+    els.productSupportBackdrop.addEventListener("click", (event) => {
+      if (event.target === els.productSupportBackdrop) {
+        closeProductSupport();
+      }
+    });
+
+    els.productSupportName.addEventListener("input", () => {
+      if (els.productSupportName.value.trim()) {
+        setProductSupportError(els.productSupportName, els.productSupportNameError, "");
+      }
+    });
+
+    els.productSupportEmail.addEventListener("input", () => {
+      if (els.productSupportEmail.value.trim()) {
+        setProductSupportError(els.productSupportEmail, els.productSupportEmailError, "");
+      }
+    });
+
+    els.productSupportForm.addEventListener("submit", handleProductSupportSubmit);
   }
 
   async function init() {
