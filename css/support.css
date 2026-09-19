@@ -97,15 +97,15 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  margin: 10px 0 22px;
+  margin: 14px 0 22px;
   padding: 0;
 }
 
-.support-illustration__art {
+.support-illustration__image {
   display: block;
   width: min(100%, 430px);
   height: auto;
-  overflow: visible;
+  object-fit: contain;
 }
 
 .support-form {
