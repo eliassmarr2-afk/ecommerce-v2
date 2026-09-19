@@ -565,3 +565,37 @@
     border-radius: 30px;
   }
 }
+
+/* TRACKING STATUS FLAT SURFACE CONTRACT */
+.tracking-status-body,
+.tracking-status-shell,
+.status-topbar,
+.status-main {
+  background: #ededed;
+}
+
+.tracking-status-shell {
+  box-shadow: none;
+}
+
+.route-card,
+.info-card,
+.route-meta div,
+.address-block,
+.shipment-product,
+.tracking-number-box,
+.empty-tracking-state {
+  background: #ffffff;
+  border: 0;
+  box-shadow: none;
+}
+
+.status-topbar__button,
+.tracking-number-box button {
+  border: 0;
+  box-shadow: none;
+}
+
+.data-row {
+  border-bottom: 0;
+}
