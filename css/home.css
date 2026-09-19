@@ -703,3 +703,46 @@
   font-size: 14px;
   font-weight: 500;
 }
+
+
+/* HOME FLAT SURFACE CONTRACT */
+.home-main {
+  background: #ededed;
+}
+
+.product-card,
+.nearby-card,
+.empty-state {
+  background: #ffffff;
+  border: 0;
+  box-shadow: none;
+}
+
+.product-card:hover,
+.product-card:focus,
+.product-card:focus-visible,
+.nearby-card:hover,
+.empty-state:focus-within {
+  border: 0;
+  box-shadow: none;
+}
+
+.product-card:focus-visible {
+  outline: 0;
+}
+
+.product-card__heart,
+.nearby-card__heart {
+  box-shadow: none;
+}
+
+.side-menu,
+.home-menu-panel {
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.side-menu__top,
+.side-menu__footer {
+  border-color: transparent;
+}
