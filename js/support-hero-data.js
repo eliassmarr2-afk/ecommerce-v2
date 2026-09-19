@@ -1,0 +1,1 @@
+window.TheCampingSupportHeroB64 = "";
