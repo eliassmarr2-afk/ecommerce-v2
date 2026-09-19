@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F7F4EE" />
+  <meta name="description" content="Estado del envío — The Camping." />
+  <title>Estado del envío · The Camping</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/base.css?v=20260919-1248" />
+  <link rel="stylesheet" href="css/tracking-status.css?v=20260919-1248" />
+</head>
+
+<body class="tracking-status-body">
+  <div class="tracking-status-shell">
+    <header class="status-topbar">
+      <a class="status-topbar__button" href="seguimiento.html" aria-label="Volver a seguimiento">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+      </a>
+
+      <span class="status-topbar__title">Seguimiento del pedido</span>
+
+      <button class="status-topbar__button" id="statusMenuButton" type="button" aria-label="Más opciones">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="5" cy="12" r="1"/>
+          <circle cx="12" cy="12" r="1"/>
+          <circle cx="19" cy="12" r="1"/>
+        </svg>
+      </button>
+    </header>
+
+    <main class="status-main">
+      <section class="route-card" aria-labelledby="statusTitle">
+        <div class="route-card__map" aria-hidden="true">
+          <svg viewBox="0 0 360 190">
+            <path d="M-20 50 105 8l58 26 76-12 144 56" class="map-road map-road--wide"/>
+            <path d="M18 170 83 102l70 9 67-51 141 18" class="map-road"/>
+            <path d="M15 20 61 83l7 103" class="map-road"/>
+            <path d="M135 -8 145 60l-25 68 8 70" class="map-road"/>
+            <path d="M245 -12 225 58l21 54-4 89" class="map-road"/>
+            <path d="M310 2 296 73l44 34" class="map-road"/>
+
+            <path d="M72 144 C117 119 126 104 155 111 C196 121 204 71 246 74 C279 76 290 98 312 103"
+              class="route-line"/>
+
+            <circle cx="72" cy="144" r="8" class="route-dot route-dot--start"/>
+            <circle cx="312" cy="103" r="9" class="route-dot route-dot--end"/>
+            <path d="m308 99 8 4-8 4Z" class="route-arrow"/>
+          </svg>
+        </div>
+
+        <div class="route-card__content">
+          <div class="status-heading-row">
+            <div>
+              <span class="status-kicker">PEDIDO <strong id="orderId">—</strong></span>
+              <h1 id="statusTitle">Cargando…</h1>
+            </div>
+            <span id="statusBadge" class="status-badge">—</span>
+          </div>
+
+          <p id="statusDetail" class="status-detail"></p>
+
+          <div class="progress-row">
+            <div class="progress-track" aria-label="Progreso del envío">
+              <span id="progressBar" class="progress-fill"></span>
+            </div>
+            <strong id="progressLabel">0%</strong>
+          </div>
+
+          <div class="route-meta">
+            <div>
+              <span>Entrega estimada</span>
+              <strong id="etaValue">—</strong>
+            </div>
+            <div>
+              <span>Última actualización</span>
+              <strong id="lastUpdate">—</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="info-card" aria-labelledby="deliveryCardTitle">
+        <div class="card-heading">
+          <div>
+            <span class="card-eyebrow">Tarjeta 1</span>
+            <h2 id="deliveryCardTitle">Datos de entrega</h2>
+          </div>
+          <span class="card-icon card-icon--forest" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 21s6-5.2 6-11a6 6 0 1 0-12 0c0 5.8 6 11 6 11Z"/>
+              <circle cx="12" cy="10" r="2.2"/>
+            </svg>
+          </span>
+        </div>
+
+        <div class="address-block">
+          <span>Dirección de entrega</span>
+          <strong id="deliveryAddress">—</strong>
+          <small id="deliveryCity">—</small>
+        </div>
+
+        <dl class="data-list">
+          <div class="data-row">
+            <dt>Destinatario</dt>
+            <dd id="recipientName">—</dd>
+          </div>
+          <div class="data-row">
+            <dt>Teléfono</dt>
+            <dd id="recipientPhone">—</dd>
+          </div>
+          <div class="data-row">
+            <dt>Franja estimada</dt>
+            <dd id="deliveryWindow">—</dd>
+          </div>
+          <div class="data-row">
+            <dt>Notas de entrega</dt>
+            <dd id="deliveryNotes">—</dd>
+          </div>
+          <div class="data-row">
+            <dt>Estado del pago</dt>
+            <dd><span id="paymentStatus" class="payment-pill">—</span></dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="info-card" aria-labelledby="shipmentCardTitle">
+        <div class="card-heading">
+          <div>
+            <span class="card-eyebrow">Tarjeta 2</span>
+            <h2 id="shipmentCardTitle">Producto y envío</h2>
+          </div>
+          <span class="card-icon card-icon--orange" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 6h11v11H3z"/>
+              <path d="M14 10h4l3 3v4h-7"/>
+              <circle cx="7" cy="18" r="2"/>
+              <circle cx="18" cy="18" r="2"/>
+            </svg>
+          </span>
+        </div>
+
+        <div class="shipment-product">
+          <img id="productImage" alt="" />
+          <div class="shipment-product__copy">
+            <span class="shipment-product__label">Producto</span>
+            <strong id="productTitle">—</strong>
+            <small id="productSubtitle">—</small>
+            <div class="shipment-product__price-row">
+              <span id="productPrice">—</span>
+              <small id="productQuantity">—</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="tracking-number-box">
+          <div>
+            <span>Número de seguimiento</span>
+            <strong id="trackingIdValue">—</strong>
+          </div>
+          <button id="copyTrackingButton" type="button" aria-label="Copiar número de seguimiento">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="8" y="8" width="11" height="11" rx="2"/>
+              <path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/>
+            </svg>
+          </button>
+        </div>
+
+        <dl class="data-list shipment-data-list">
+          <div class="data-row">
+            <dt>Método de envío</dt>
+            <dd id="shippingMethod">—</dd>
+          </div>
+          <div class="data-row">
+            <dt>Operador logístico</dt>
+            <dd id="shippingCarrier">—</dd>
+          </div>
+          <div class="data-row">
+            <dt>Servicio</dt>
+            <dd id="shippingService">—</dd>
+          </div>
+          <div class="data-row">
+            <dt>Entrega estimada</dt>
+            <dd id="shippingEta">—</dd>
+          </div>
+        </dl>
+      </section>
+
+      <button id="supportButton" class="support-button" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z"/>
+          <path d="M8 10h8M8 14h5"/>
+        </svg>
+        <span>Contactar soporte</span>
+      </button>
+    </main>
+
+    <div id="statusToast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="js/data/tracking-demo.js?v=20260919-1248"></script>
+  <script src="js/tracking-status.js?v=20260919-1248"></script>
+</body>
+</html>
