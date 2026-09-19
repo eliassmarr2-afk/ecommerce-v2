@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F7F4EE" />
+  <meta name="description" content="Soporte — The Camping." />
+  <title>Soporte · The Camping</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/base.css?v=20260919-1335" />
+  <link rel="stylesheet" href="css/support.css?v=20260919-1335" />
+</head>
+
+<body class="support-body">
+  <div class="support-shell">
+    <header class="support-topbar">
+      <a class="support-topbar__control" href="index.html" aria-label="Volver al inicio">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+      </a>
+
+      <div class="support-progress" aria-hidden="true">
+        <span></span>
+      </div>
+
+      <a class="support-topbar__link" href="index.html">Inicio</a>
+    </header>
+
+    <main class="support-main">
+      <section class="support-heading">
+        <span class="support-heading__eyebrow">SOPORTE THE CAMPING</span>
+        <h1>¿Cómo podemos ayudarte?</h1>
+        <p>Contanos qué necesitás y dejamos preparado el acceso correcto para tu consulta.</p>
+      </section>
+
+      <section class="support-illustration" aria-hidden="true">
+        <div class="support-illustration__blob"></div>
+
+        <svg viewBox="0 0 430 290">
+          <path d="M62 232c55 26 240 26 304-1" stroke="#E8DCC8" stroke-width="3" opacity=".75"/>
+
+          <g transform="translate(48 61)">
+            <path d="M55 46c-24 0-42 24-42 55v85h65v-87c0-30-5-53-23-53Z" fill="#355A42"/>
+            <circle cx="54" cy="31" r="22" fill="#E7B17A"/>
+            <path d="M36 24c5-22 37-27 44-2-9-6-17-8-24-5-8 3-14 9-20 7Z" fill="#284735"/>
+            <path d="M22 99c17 5 44 5 63 0l10 94H6l16-94Z" fill="#6E8D76"/>
+            <path d="M16 115 0 179M84 115l19 62" stroke="#284735" stroke-width="10" stroke-linecap="round"/>
+            <path d="M27 187 12 223M71 187l15 37" stroke="#284735" stroke-width="10" stroke-linecap="round"/>
+            <rect x="15" y="88" width="74" height="58" rx="15" fill="#F7F4EE"/>
+            <path d="M30 105h44M30 118h31" stroke="#F47B3A" stroke-width="6" stroke-linecap="round"/>
+          </g>
+
+          <g transform="translate(226 44)">
+            <circle cx="70" cy="39" r="23" fill="#E7B17A"/>
+            <path d="M48 31c7-24 41-23 48 1-10-4-20-7-28-4-7 3-12 7-20 3Z" fill="#284735"/>
+            <path d="M43 70c14-8 42-8 57 0l20 104H28L43 70Z" fill="#F47B3A"/>
+            <path d="M38 88 6 156M105 91l42 52" stroke="#D96C2F" stroke-width="12" stroke-linecap="round"/>
+            <path d="M48 173 36 224M95 173l16 51" stroke="#284735" stroke-width="11" stroke-linecap="round"/>
+            <path d="M52 92c20 9 35 9 53 0" stroke="#FFF0E6" stroke-width="5" stroke-linecap="round"/>
+            <path d="M12 154c15 4 29 2 43-8" stroke="#355A42" stroke-width="7" stroke-linecap="round"/>
+            <path d="M141 143c-12 6-26 7-38 1" stroke="#355A42" stroke-width="7" stroke-linecap="round"/>
+          </g>
+
+          <g transform="translate(173 31)">
+            <rect x="0" y="0" width="74" height="48" rx="16" fill="#E8EFEA"/>
+            <path d="M22 18h31M22 28h21" stroke="#355A42" stroke-width="5" stroke-linecap="round"/>
+            <path d="m16 47 9-10" stroke="#E8EFEA" stroke-width="9" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </section>
+
+      <form id="supportForm" class="support-form" novalidate>
+        <div class="support-field">
+          <label for="supportEmail">Correo</label>
+          <div class="support-control">
+            <span class="support-control__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z"/><path d="m3 7 9 6 9-6"/></svg>
+            </span>
+            <input id="supportEmail" name="email" type="email" autocomplete="email" placeholder="tu@email.com" />
+          </div>
+          <span class="support-field__error" data-error-for="supportEmail" hidden></span>
+        </div>
+
+        <div class="support-field">
+          <label for="supportName">Nombre y Apellido</label>
+          <div class="support-control">
+            <span class="support-control__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+            </span>
+            <input id="supportName" name="name" type="text" autocomplete="name" placeholder="Nombre completo" />
+          </div>
+          <span class="support-field__error" data-error-for="supportName" hidden></span>
+        </div>
+
+        <div class="support-field">
+          <label for="supportSubject">Asunto</label>
+          <div class="support-control support-control--select">
+            <span class="support-control__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/></svg>
+            </span>
+            <select id="supportSubject" name="subject">
+              <option value="">Seleccioná una opción</option>
+              <option value="order_problem">Problemas con mi pedido</option>
+              <option value="order_info">Saber sobre mi pedido</option>
+              <option value="change_address">Cambiar domicilio</option>
+              <option value="change_delivery_date">Cambiar fecha de entrega</option>
+              <option value="other">Otro</option>
+            </select>
+            <span class="support-control__chevron" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m7 9 5 5 5-5"/></svg>
+            </span>
+          </div>
+          <span class="support-field__error" data-error-for="supportSubject" hidden></span>
+        </div>
+
+        <button class="support-submit" type="submit">Contactar</button>
+      </form>
+
+      <div class="support-context-note">
+        <span class="support-context-note__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+        </span>
+        <p>
+          Más adelante, si tu compra puede identificarse de forma segura, soporte podrá recibir el contexto de tu pedido automáticamente.
+        </p>
+      </div>
+    </main>
+
+    <div id="supportToast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="js/support.js?v=20260919-1335"></script>
+</body>
+</html>
