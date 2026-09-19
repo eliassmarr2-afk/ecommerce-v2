@@ -9,18 +9,57 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/base.css?v=20260919-1315" />
-  <link rel="stylesheet" href="css/home.css?v=20260919-1315" />
+  <link rel="stylesheet" href="css/base.css?v=20260919-1355" />
+  <link rel="stylesheet" href="css/home.css?v=20260919-1355" />
 </head>
 <body class="home-page">
   <div class="app-shell">
     <header class="home-header">
       <div class="location-row">
-        <button id="openMenuButton" class="menu-button" type="button" aria-label="Abrir menú" aria-controls="homeMenu" aria-expanded="false">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M4 7h16M4 12h16M4 17h16"/>
-          </svg>
-        </button>
+        <details id="homeMenu" class="home-menu-native">
+          <summary class="menu-button" aria-label="Abrir menú">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16"/>
+            </svg>
+          </summary>
+
+          <aside class="home-menu-panel" aria-labelledby="menuTitle">
+            <div class="side-menu__top">
+              <div>
+                <span class="side-menu__eyebrow">THE CAMPING</span>
+                <h2 id="menuTitle">Menú</h2>
+              </div>
+              <button id="closeMenuButton" class="side-menu__close" type="button" aria-label="Cerrar menú">×</button>
+            </div>
+
+            <nav class="side-menu__nav" aria-label="Menú de The Camping">
+              <a class="side-menu__primary-link" href="index.html">Inicio</a>
+
+              <div class="side-menu__group side-menu__group--static">
+                <div class="side-menu__group-title">Categorías</div>
+                <div id="menuCategories" class="side-menu__subnav"></div>
+              </div>
+
+              <a class="side-menu__primary-link" href="seguimiento.html">Rastreá tu compra</a>
+              <a class="side-menu__primary-link" href="soporte.html">Contactá con soporte</a>
+
+              <div class="side-menu__group side-menu__group--static">
+                <div class="side-menu__group-title">Políticas</div>
+                <div class="side-menu__subnav">
+                  <button type="button" data-menu-placeholder="Política de privacidad">Privacidad</button>
+                  <button type="button" data-menu-placeholder="Política de envío">Envíos</button>
+                  <button type="button" data-menu-placeholder="Política de devolución">Devoluciones</button>
+                  <button type="button" data-menu-placeholder="Política de compra">Compra</button>
+                </div>
+              </div>
+            </nav>
+
+            <div class="side-menu__footer">
+              <span>Equipamiento para salir.</span>
+              <strong>The Camping</strong>
+            </div>
+          </aside>
+        </details>
 
         <div class="location-copy">
           <span class="micro-label">Ubicación</span>
@@ -118,45 +157,6 @@
     </nav>
   </div>
 
-  <div id="homeMenu" class="menu-backdrop" hidden>
-    <aside class="side-menu" role="dialog" aria-modal="true" aria-labelledby="menuTitle">
-      <div class="side-menu__top">
-        <div>
-          <span class="side-menu__eyebrow">THE CAMPING</span>
-          <h2 id="menuTitle">Menú</h2>
-        </div>
-        <button id="closeMenuButton" class="side-menu__close" type="button" aria-label="Cerrar menú">×</button>
-      </div>
-
-      <nav class="side-menu__nav" aria-label="Menú de The Camping">
-        <a class="side-menu__primary-link" href="index.html">Inicio</a>
-
-        <details class="side-menu__group" open>
-          <summary>Categorías</summary>
-          <div id="menuCategories" class="side-menu__subnav"></div>
-        </details>
-
-        <a class="side-menu__primary-link" href="seguimiento.html">Rastreá tu compra</a>
-        <a class="side-menu__primary-link" href="soporte.html">Contactá con soporte</a>
-
-        <details class="side-menu__group">
-          <summary>Políticas</summary>
-          <div class="side-menu__subnav">
-            <button type="button" data-menu-placeholder="Política de privacidad">Privacidad</button>
-            <button type="button" data-menu-placeholder="Política de envío">Envíos</button>
-            <button type="button" data-menu-placeholder="Política de devolución">Devoluciones</button>
-            <button type="button" data-menu-placeholder="Política de compra">Compra</button>
-          </div>
-        </details>
-      </nav>
-
-      <div class="side-menu__footer">
-        <span>Equipamiento para salir.</span>
-        <strong>The Camping</strong>
-      </div>
-    </aside>
-  </div>
-
   <div id="filterSheet" class="sheet-backdrop" hidden>
     <section class="filter-sheet" role="dialog" aria-modal="true" aria-labelledby="filterTitle">
       <div class="sheet-handle"></div>
@@ -195,7 +195,7 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/data/catalog.js?v=20260919-1315"></script>
-  <script src="js/home.js?v=20260919-1315"></script>
+  <script src="js/data/catalog.js?v=20260919-1355"></script>
+  <script src="js/home.js?v=20260919-1355"></script>
 </body>
 </html>
