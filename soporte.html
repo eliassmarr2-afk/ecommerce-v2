@@ -11,8 +11,52 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
 
-  <link rel="stylesheet" href="css/base.css?v=20260919-1436" />
-  <link rel="stylesheet" href="css/support.css?v=20260919-1436" />
+  <link rel="stylesheet" href="css/base.css?v=20260919-1455" />
+  <link rel="stylesheet" href="css/support.css?v=20260919-1455" />
+
+  <style>
+    /* Support surface contract — intentionally inline to avoid stale CSS */
+    html,
+    body.support-body,
+    .support-shell,
+    .support-topbar,
+    .support-main {
+      background: #ededed !important;
+      box-shadow: none !important;
+    }
+
+    .support-control,
+    .support-control:hover,
+    .support-control:focus,
+    .support-control:focus-within {
+      background: #ffffff !important;
+      border: 0 !important;
+      outline: 0 !important;
+      box-shadow: none !important;
+      filter: none !important;
+    }
+
+    .support-control input,
+    .support-control select,
+    .support-control input:hover,
+    .support-control select:hover,
+    .support-control input:focus,
+    .support-control select:focus {
+      background: transparent !important;
+      border: 0 !important;
+      outline: 0 !important;
+      box-shadow: none !important;
+      -webkit-box-shadow: none !important;
+    }
+
+    .support-context-note {
+      background: #ffffff !important;
+      border: 0 !important;
+      outline: 0 !important;
+      box-shadow: none !important;
+    }
+  </style>
+
 </head>
 
 <body class="support-body">
@@ -106,6 +150,6 @@
     <div id="supportToast" class="toast" role="status" aria-live="polite"></div>
   </div>
 
-  <script src="js/support.js?v=20260919-1436"></script>
+  <script src="js/support.js?v=20260919-1455"></script>
 </body>
 </html>
