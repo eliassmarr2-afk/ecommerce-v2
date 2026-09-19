@@ -482,3 +482,47 @@
     border-radius: 0 0 30px 30px;
   }
 }
+
+/* PRODUCT / COMBO FLAT SURFACE CONTRACT */
+.product-body,
+.product-shell,
+.product-sheet {
+  background: #ededed;
+}
+
+.product-shell {
+  box-shadow: none;
+}
+
+.product-intro,
+.detail-section,
+.seller-section,
+.delivery-section,
+.features-section {
+  background: #ffffff;
+  border: 0;
+  border-radius: 18px;
+  box-shadow: none;
+  padding: 18px;
+}
+
+.detail-section,
+.seller-section,
+.delivery-section,
+.features-section {
+  margin-top: 14px;
+}
+
+.seller-actions button,
+.feature-item__check {
+  border: 0;
+  box-shadow: none;
+}
+
+.purchase-bar {
+  background: #ffffff;
+  border: 0;
+  border-top: 0;
+  box-shadow: none;
+  backdrop-filter: none;
+}
