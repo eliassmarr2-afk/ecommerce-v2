@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/base.css?v=20260919-1510" />
-  <link rel="stylesheet" href="css/product.css?v=20260919-1510" />
+  <link rel="stylesheet" href="css/base.css?v=20260919-1535" />
+  <link rel="stylesheet" href="css/product.css?v=20260919-1535" />
 </head>
 <body class="product-body">
   <div class="product-shell">
@@ -91,7 +91,7 @@
             <button type="button" aria-label="Consultar por teléfono">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 2 .7 2.9a2 2 0 0 1-.5 2.1L8 10a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c1 .3 1.9.6 2.9.7a2 2 0 0 1 1.7 2Z"/></svg>
             </button>
-            <button type="button" aria-label="Enviar mensaje">
+            <button id="productSupportButton" type="button" aria-label="Consultar por este producto">
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4v8Z"/><path d="M8 10h8M8 14h5"/></svg>
             </button>
           </div>
@@ -122,10 +122,111 @@
       <button id="addToCart" class="buy-button" type="button">Comprar ahora</button>
     </div>
 
+    <div id="productSupportBackdrop" class="product-support-backdrop" hidden>
+      <section
+        id="productSupportSheet"
+        class="product-support-sheet"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="productSupportTitle"
+      >
+        <div class="product-support-sheet__handle" aria-hidden="true"></div>
+
+        <div class="product-support-sheet__header">
+          <div>
+            <span class="product-support-sheet__eyebrow">SOPORTE CONTEXTUAL</span>
+            <h2 id="productSupportTitle">Consultar este producto</h2>
+          </div>
+
+          <button id="closeProductSupport" class="product-support-sheet__close" type="button" aria-label="Cerrar">
+            ×
+          </button>
+        </div>
+
+        <div id="productSupportFormView">
+          <div class="product-support-context">
+            <img id="supportProductImage" alt="" />
+            <div class="product-support-context__copy">
+              <span>Estás consultando por</span>
+              <strong id="supportProductTitle">Producto</strong>
+              <small id="supportProductPrice"></small>
+            </div>
+          </div>
+
+          <form id="productSupportForm" class="product-support-form" novalidate>
+            <div class="product-support-field">
+              <label for="productSupportName">Nombre y Apellido</label>
+              <div class="product-support-control">
+                <span class="product-support-control__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+                </span>
+                <input
+                  id="productSupportName"
+                  name="name"
+                  type="text"
+                  autocomplete="name"
+                  placeholder="Nombre completo"
+                />
+              </div>
+              <span id="productSupportNameError" class="product-support-error" hidden></span>
+            </div>
+
+            <div class="product-support-field">
+              <label for="productSupportEmail">Correo</label>
+              <div class="product-support-control">
+                <span class="product-support-control__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z"/><path d="m3 7 9 6 9-6"/></svg>
+                </span>
+                <input
+                  id="productSupportEmail"
+                  name="email"
+                  type="email"
+                  autocomplete="email"
+                  placeholder="tu@email.com"
+                />
+              </div>
+              <span id="productSupportEmailError" class="product-support-error" hidden></span>
+            </div>
+
+            <button class="product-support-submit" type="submit">
+              Consultar e ir al chat
+            </button>
+          </form>
+
+          <p class="product-support-note">
+            Te enviaremos por correo el acceso seguro al chat cuando este flujo esté conectado.
+          </p>
+        </div>
+
+        <div id="productSupportSuccessView" class="product-support-success" hidden>
+          <div class="gmail-style-icon" aria-hidden="true">
+            <svg viewBox="0 0 64 48">
+              <path d="M7 9 32 29 57 9" stroke="#EA4335" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M7 10v29" stroke="#4285F4" stroke-width="8" stroke-linecap="round"/>
+              <path d="M57 10v29" stroke="#34A853" stroke-width="8" stroke-linecap="round"/>
+              <path d="m7 39 14-11" stroke="#FBBC04" stroke-width="8" stroke-linecap="round"/>
+              <path d="m57 39-14-11" stroke="#EA4335" stroke-width="8" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <span class="product-support-success__eyebrow">ACCESO PREPARADO</span>
+          <h3>El acceso al chat fue enviado a tu correo</h3>
+          <p>
+            Revisá tu bandeja de entrada para continuar la consulta sobre
+            <strong id="supportSuccessProductTitle">este producto</strong>.
+          </p>
+
+          <button id="closeProductSupportSuccess" class="product-support-success__button" type="button">
+            Cerrar
+          </button>
+        </div>
+      </section>
+    </div>
+
     <div id="toast" class="toast product-toast" role="status" aria-live="polite"></div>
   </div>
 
-  <script src="js/data/catalog.js?v=20260919-1510"></script>
-  <script src="js/product.js?v=20260919-1510"></script>
+  <script src="js/data/catalog.js?v=20260919-1535"></script>
+  <script src="js/product.js?v=20260919-1535"></script>
 </body>
 </html>
