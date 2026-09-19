@@ -27,8 +27,7 @@
     fastDeliveryFilter: document.getElementById("fastDeliveryFilter"),
     toast: document.getElementById("toast"),
     cartCount: document.getElementById("cartCount"),
-    menuBackdrop: document.getElementById("homeMenu"),
-    openMenuButton: document.getElementById("openMenuButton"),
+    menuDetails: document.getElementById("homeMenu"),
     closeMenuButton: document.getElementById("closeMenuButton"),
     menuCategories: document.getElementById("menuCategories")
   };
@@ -228,25 +227,11 @@
     els.emptyState.hidden = hasProducts;
   }
 
-  function openMenu() {
-    els.menuBackdrop.hidden = false;
-    requestAnimationFrame(() => {
-      els.menuBackdrop.classList.add("is-open");
-      els.openMenuButton.setAttribute("aria-expanded", "true");
-    });
-    document.body.classList.add("no-scroll");
-  }
-
   function closeMenu() {
-    els.menuBackdrop.classList.remove("is-open");
-    els.openMenuButton.setAttribute("aria-expanded", "false");
+    if (els.menuDetails) {
+      els.menuDetails.open = false;
+    }
     document.body.classList.remove("no-scroll");
-
-    window.setTimeout(() => {
-      if (!els.menuBackdrop.classList.contains("is-open")) {
-        els.menuBackdrop.hidden = true;
-      }
-    }, 190);
   }
 
   function openFilters() {
@@ -291,13 +276,10 @@
   }
 
   function wireEvents() {
-    els.openMenuButton.addEventListener("click", openMenu);
     els.closeMenuButton.addEventListener("click", closeMenu);
 
-    els.menuBackdrop.addEventListener("click", (event) => {
-      if (event.target === els.menuBackdrop) {
-        closeMenu();
-      }
+    els.menuDetails.addEventListener("toggle", () => {
+      document.body.classList.toggle("no-scroll", els.menuDetails.open);
     });
 
     document.querySelectorAll("[data-menu-placeholder]").forEach((button) => {
