@@ -16,11 +16,11 @@
   --muted: #747A75;
   --line: #E9E6DE;
   --surface: #FFFFFF;
-  --page: #F7F4EE;
+  --page: #ededed;
   --nav-height: 72px;
   --app-width: 480px;
-  --shadow-soft: 0 8px 26px rgba(40, 71, 53, 0.06);
-  --shadow-card: 0 8px 24px rgba(40, 71, 53, 0.08);
+  --shadow-soft: none;
+  --shadow-card: none;
 }
 
 * {
@@ -535,4 +535,45 @@ svg {
 
 .sheet-backdrop[hidden] {
   display: none !important;
+}
+
+
+/* GLOBAL FLAT SURFACE CONTRACT
+   The Camping: #ededed canvas + white borderless, shadowless surfaces */
+html,
+body,
+.app-shell,
+.home-header {
+  background: #ededed;
+}
+
+.app-shell {
+  box-shadow: none;
+}
+
+.search-box,
+.filter-sheet,
+.bottom-nav,
+.toggle-row {
+  background: #ffffff;
+  border: 0;
+  box-shadow: none;
+}
+
+.search-box:focus-within,
+.filter-sheet:focus-within,
+.bottom-nav:focus-within,
+.toggle-row:focus-within {
+  border: 0;
+  box-shadow: none;
+}
+
+.bottom-nav {
+  border-top: 0;
+  box-shadow: none;
+}
+
+.chip {
+  border: 0;
+  box-shadow: none;
 }
