@@ -91,11 +91,15 @@
 
     setValidationState("");
 
-    /*
-     * Search-result navigation is deliberately deferred to the next phase.
-     * The agreed synthetic ID is 123456 -> "En camino".
-     */
-    showToast("Buscador listo. El resultado de seguimiento se conecta en la próxima etapa.");
+    if (trackingId === "123456") {
+      window.location.assign(
+        `seguimiento-estado.html?trackingId=${encodeURIComponent(trackingId)}`
+      );
+      return;
+    }
+
+    setValidationState("No encontramos ese ID en esta demo. Probá con 123456.");
+    els.input.focus();
   }
 
   async function handlePaste() {
