@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/base.css?v=20260919-1550" />
-  <link rel="stylesheet" href="css/product.css?v=20260919-1550" />
+  <link rel="stylesheet" href="css/base.css?v=20260919-1648" />
+  <link rel="stylesheet" href="css/product.css?v=20260919-1648" />
 </head>
 <body class="product-body">
   <div class="product-shell">
@@ -189,36 +189,58 @@
             </div>
 
             <button class="product-support-submit" type="submit">
-              Consultar e ir al chat
+              Contactar
             </button>
           </form>
 
           <p class="product-support-note">
-            Te enviaremos por correo el acceso seguro al chat cuando este flujo esté conectado.
+            Tus datos se usan para identificar esta consulta dentro de la sesión actual.
           </p>
         </div>
 
-        <div id="productSupportSuccessView" class="product-support-success" hidden>
-          <div class="gmail-style-icon" aria-hidden="true">
-            <svg viewBox="0 0 64 48">
-              <path d="M7 9 32 29 57 9" stroke="#EA4335" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
-              <path d="M7 10v29" stroke="#4285F4" stroke-width="8" stroke-linecap="round"/>
-              <path d="M57 10v29" stroke="#34A853" stroke-width="8" stroke-linecap="round"/>
-              <path d="m7 39 14-11" stroke="#FBBC04" stroke-width="8" stroke-linecap="round"/>
-              <path d="m57 39-14-11" stroke="#EA4335" stroke-width="8" stroke-linecap="round"/>
-            </svg>
+        <div id="productSupportChatView" class="product-support-chat" hidden>
+          <div class="product-support-chat__context">
+            <img id="chatProductImage" alt="" />
+            <div>
+              <span>Consulta de producto</span>
+              <strong id="chatProductTitle">Producto</strong>
+            </div>
           </div>
 
-          <span class="product-support-success__eyebrow">ACCESO PREPARADO</span>
-          <h3>El acceso al chat fue enviado a tu correo</h3>
-          <p>
-            Revisá tu bandeja de entrada para continuar la consulta sobre
-            <strong id="supportSuccessProductTitle">este producto</strong>.
-          </p>
+          <div class="product-support-chat__notices">
+            <div class="product-support-chat__notice">
+              <span class="product-support-chat__notice-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              </span>
+              <p>
+                En esta versión de prueba, el chat se mantiene mientras esta sesión del navegador siga activa.
+                Si cerrás la pestaña, puede perderse.
+              </p>
+            </div>
 
-          <button id="closeProductSupportSuccess" class="product-support-success__button" type="button">
-            Cerrar
-          </button>
+            <div class="product-support-chat__notice product-support-chat__notice--security">
+              <span class="product-support-chat__notice-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.4 8 8 9 4.6-1 8-4 8-9V6l-8-3Z"/><path d="M12 8v5M12 17h.01"/></svg>
+              </span>
+              <p>
+                Si hiciste una compra, no podemos darte información sensible sobre ella hasta validar tu identidad.
+              </p>
+            </div>
+          </div>
+
+          <div id="productSupportMessages" class="product-support-messages" aria-live="polite"></div>
+
+          <form id="productSupportMessageForm" class="product-support-composer" novalidate>
+            <input
+              id="productSupportMessageInput"
+              type="text"
+              autocomplete="off"
+              maxlength="800"
+              placeholder="Escribí tu mensaje..."
+              aria-label="Escribí tu mensaje"
+            />
+            <button type="submit">Enviar</button>
+          </form>
         </div>
       </section>
     </div>
@@ -226,7 +248,7 @@
     <div id="toast" class="toast product-toast" role="status" aria-live="polite"></div>
   </div>
 
-  <script src="js/data/catalog.js?v=20260919-1550"></script>
-  <script src="js/product.js?v=20260919-1550"></script>
+  <script src="js/data/catalog.js?v=20260919-1648"></script>
+  <script src="js/product.js?v=20260919-1648"></script>
 </body>
 </html>
