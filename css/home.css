@@ -33,7 +33,7 @@
   padding: 0;
   border: 0;
   background: transparent;
-  color: #4a4a4a;
+  color: var(--forest-dark);
   cursor: pointer;
   scroll-snap-align: start;
 }
@@ -44,8 +44,8 @@
   height: 58px;
   place-items: center;
   border-radius: 50%;
-  background: #fff6f0;
-  color: var(--orange);
+  background: var(--forest-soft);
+  color: var(--forest);
   transition: 160ms ease;
 }
 
@@ -66,13 +66,13 @@
 }
 
 .category-card.is-active .category-card__icon {
-  background: var(--orange);
+  background: var(--forest);
   color: #fff;
-  box-shadow: 0 8px 18px rgba(255, 122, 61, 0.22);
+  box-shadow: 0 8px 18px rgba(53, 90, 66, 0.20);
 }
 
 .category-card.is-active .category-card__label {
-  color: var(--orange);
+  color: var(--forest);
 }
 
 .products-section {
@@ -116,7 +116,7 @@
 }
 
 .product-card:focus-visible {
-  outline: 2px solid var(--orange);
+  outline: 2px solid var(--forest);
   outline-offset: 3px;
 }
 
@@ -141,8 +141,8 @@
   left: 10px;
   padding: 5px 8px;
   border-radius: 5px;
-  background: rgba(255, 255, 255, 0.94);
-  color: #c77c50;
+  background: rgba(232, 239, 234, 0.94);
+  color: var(--forest-dark);
   font-size: 9px;
   font-weight: 600;
 }
@@ -157,7 +157,7 @@
   place-items: center;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.96);
-  color: #636363;
+  color: var(--forest-dark);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
@@ -203,7 +203,7 @@
 .meta-item svg {
   width: 12px;
   height: 12px;
-  color: var(--orange);
+  color: var(--forest);
   stroke-width: 2.2;
 }
 
@@ -221,7 +221,7 @@
 
 .price-stack strong {
   display: block;
-  color: #d67e4d;
+  color: var(--orange);
   font-size: 18px;
   font-weight: 600;
   letter-spacing: -0.035em;
@@ -252,20 +252,20 @@
   margin-left: -5px;
   border: 1.5px solid #fff;
   border-radius: 50%;
-  background: #d7c3b6;
+  background: var(--sand);
 }
 
 .avatar-stack i:first-child {
   margin-left: 0;
-  background: #ccb09d;
+  background: #C8B79E;
 }
 
 .avatar-stack i:nth-child(2) {
-  background: #d9c49e;
+  background: #D9CAA9;
 }
 
 .avatar-stack i:nth-child(3) {
-  background: #aeb8b3;
+  background: #AABCAF;
 }
 
 .proof-count {
@@ -341,7 +341,7 @@
 }
 
 .nearby-card__category {
-  color: #cf8a60;
+  color: var(--forest);
   font-size: 8px;
   font-weight: 600;
 }
@@ -369,12 +369,12 @@
 .nearby-card__meta svg {
   width: 11px;
   height: 11px;
-  color: var(--orange);
+  color: var(--forest);
 }
 
 .nearby-card__price {
   margin-top: 8px;
-  color: #d77f4e;
+  color: var(--orange);
   font-size: 15px;
   font-weight: 600;
   letter-spacing: -0.025em;
@@ -396,8 +396,8 @@
   margin: 0 auto 12px;
   place-items: center;
   border-radius: 50%;
-  background: var(--orange-soft);
-  color: var(--orange);
+  background: var(--forest-soft);
+  color: var(--forest);
 }
 
 .empty-state__icon svg {
