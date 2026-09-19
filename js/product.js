@@ -56,8 +56,6 @@
     supportProductImage: document.getElementById("supportProductImage"),
     supportProductTitle: document.getElementById("supportProductTitle"),
     supportProductPrice: document.getElementById("supportProductPrice"),
-    chatProductImage: document.getElementById("chatProductImage"),
-    chatProductTitle: document.getElementById("chatProductTitle"),
     productSupportMessages: document.getElementById("productSupportMessages"),
     productSupportMessageForm: document.getElementById("productSupportMessageForm"),
     productSupportMessageInput: document.getElementById("productSupportMessageInput")
@@ -150,10 +148,6 @@
     els.supportProductImage.alt = product.title;
     els.supportProductTitle.textContent = product.title;
     els.supportProductPrice.textContent = money.format(product.price);
-    els.chatProductImage.src = product.image;
-    els.chatProductImage.alt = product.title;
-    els.chatProductTitle.textContent = product.title;
-
     const storedSession = loadProductSupportSession();
     if (storedSession) {
       showProductSupportChat(storedSession);
@@ -229,9 +223,6 @@
   function showProductSupportChat(session) {
     els.productSupportFormView.hidden = true;
     els.productSupportChatView.hidden = false;
-    els.chatProductImage.src = product.image;
-    els.chatProductImage.alt = product.title;
-    els.chatProductTitle.textContent = product.title;
     renderProductSupportMessages(session);
 
     requestAnimationFrame(() => {
