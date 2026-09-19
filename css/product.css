@@ -820,3 +820,202 @@
     border-radius: 28px;
   }
 }
+
+
+/* PRODUCT CONTEXTUAL CHAT */
+.product-support-chat {
+  padding-top: 18px;
+}
+
+.product-support-chat__context {
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding: 9px;
+  border: 0;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.product-support-chat__context img {
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: #ededed;
+}
+
+.product-support-chat__context span,
+.product-support-chat__context strong {
+  display: block;
+}
+
+.product-support-chat__context span {
+  color: #929292;
+  font-size: 9px;
+}
+
+.product-support-chat__context strong {
+  margin-top: 3px;
+  overflow: hidden;
+  color: var(--forest-dark);
+  font-size: 13px;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-support-chat__notices {
+  display: grid;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.product-support-chat__notice {
+  display: grid;
+  grid-template-columns: 28px minmax(0, 1fr);
+  align-items: start;
+  gap: 9px;
+  padding: 11px 12px;
+  border: 0;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.product-support-chat__notice--security {
+  background: #ffffff;
+}
+
+.product-support-chat__notice-icon {
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 9px;
+  background: var(--forest-soft);
+  color: var(--forest);
+}
+
+.product-support-chat__notice-icon svg {
+  width: 15px;
+  height: 15px;
+}
+
+.product-support-chat__notice p {
+  margin: 1px 0 0;
+  color: #737373;
+  font-size: 9px;
+  line-height: 1.5;
+}
+
+.product-support-messages {
+  display: flex;
+  min-height: 220px;
+  max-height: 320px;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  margin-top: 12px;
+  padding: 14px 2px 8px;
+  scrollbar-width: none;
+}
+
+.product-support-messages::-webkit-scrollbar {
+  display: none;
+}
+
+.product-support-message {
+  display: flex;
+  max-width: 86%;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.product-support-message--operator {
+  align-self: flex-start;
+}
+
+.product-support-message--customer {
+  align-self: flex-end;
+  align-items: flex-end;
+}
+
+.product-support-message__sender {
+  padding: 0 4px;
+  color: #8c8c8c;
+  font-size: 8px;
+  font-weight: 600;
+}
+
+.product-support-message__bubble {
+  padding: 11px 13px;
+  border: 0;
+  border-radius: 16px;
+  background: #ffffff;
+  color: var(--ink);
+  box-shadow: none;
+  font-size: 12px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.product-support-message--customer .product-support-message__bubble {
+  background: var(--forest);
+  color: #ffffff;
+  border-bottom-right-radius: 5px;
+}
+
+.product-support-message--operator .product-support-message__bubble {
+  border-bottom-left-radius: 5px;
+}
+
+.product-support-composer {
+  position: sticky;
+  bottom: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 8px;
+  padding-top: 10px;
+  background: #ededed;
+}
+
+.product-support-composer input {
+  width: 100%;
+  min-width: 0;
+  min-height: 52px;
+  padding: 0 15px;
+  border: 0;
+  border-radius: 16px;
+  outline: 0;
+  background: #ffffff;
+  color: var(--ink);
+  box-shadow: none;
+  font-size: 13px;
+}
+
+.product-support-composer input:focus {
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+}
+
+.product-support-composer input::placeholder {
+  color: #999999;
+}
+
+.product-support-composer button {
+  min-width: 78px;
+  min-height: 52px;
+  padding: 0 15px;
+  border: 0;
+  border-radius: 16px;
+  background: var(--orange);
+  color: #ffffff;
+  cursor: pointer;
+  box-shadow: none;
+  font-size: 12px;
+  font-weight: 600;
+}
