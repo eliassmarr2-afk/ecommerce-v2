@@ -147,20 +147,45 @@
 
     copy.append(label, title);
 
-    const chevron = document.createElement("span");
-    chevron.className = "conversation-resume-widget__chevron";
-    chevron.setAttribute("aria-hidden", "true");
-    chevron.innerHTML = '<svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>';
+    const operatorUnreadCount = Math.max(
+      0,
+      Number(session.operatorUnreadCount || 0)
+    );
 
-    button.append(icon, copy, chevron);
+    const status = document.createElement("span");
+    status.className = "conversation-resume-widget__status";
+
+    if (operatorUnreadCount > 0) {
+      const badge = document.createElement("span");
+      badge.className = "conversation-resume-widget__badge";
+      badge.textContent = operatorUnreadCount > 99 ? "99+" : String(operatorUnreadCount);
+      badge.setAttribute(
+        "aria-label",
+        `${operatorUnreadCount} ${operatorUnreadCount === 1 ? "respuesta nueva" : "respuestas nuevas"} del operador`
+      );
+      status.appendChild(badge);
+    } else {
+      const chevron = document.createElement("span");
+      chevron.className = "conversation-resume-widget__chevron";
+      chevron.setAttribute("aria-hidden", "true");
+      chevron.innerHTML = '<svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>';
+      status.appendChild(chevron);
+    }
+
+    button.append(icon, copy, status);
     button.addEventListener("click", () => openConversation(session));
     wrapper.appendChild(button);
 
     target.insertAdjacentElement("afterend", wrapper);
   }
 
+  window.TheCampingConversationWidget = {
+    refresh: mountWidget
+  };
+
   window.addEventListener("thecamping:product-support-started", mountWidget);
   window.addEventListener("thecamping:product-support-message", mountWidget);
+  window.addEventListener("thecamping:product-support-operator-update", mountWidget);
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", mountWidget, { once: true });
