@@ -4,18 +4,23 @@
   --type-title: 23px;
   --type-body: 15px;
   --type-label: 12px;
-  --orange: #ff7a3d;
-  --orange-dark: #f06c2f;
-  --orange-soft: #fff1e8;
-  --ink: #171717;
-  --muted: #8d8d8d;
-  --line: #eeeeee;
-  --surface: #ffffff;
-  --page: #f5f5f5;
+  --forest: #355A42;
+  --forest-dark: #284735;
+  --forest-soft: #E8EFEA;
+  --sand: #E8DCC8;
+  --sand-soft: #F7F4EE;
+  --orange: #F47B3A;
+  --orange-dark: #D96C2F;
+  --orange-soft: #FFF0E6;
+  --ink: #242624;
+  --muted: #747A75;
+  --line: #E9E6DE;
+  --surface: #FFFFFF;
+  --page: #F7F4EE;
   --nav-height: 72px;
   --app-width: 480px;
-  --shadow-soft: 0 8px 26px rgba(25, 25, 25, 0.06);
-  --shadow-card: 0 8px 24px rgba(34, 34, 34, 0.08);
+  --shadow-soft: 0 8px 26px rgba(40, 71, 53, 0.06);
+  --shadow-card: 0 8px 24px rgba(40, 71, 53, 0.08);
 }
 
 * {
@@ -132,7 +137,7 @@ svg {
   padding: 0;
   border: 0;
   background: transparent;
-  color: #282828;
+  color: var(--forest-dark);
   cursor: pointer;
   font-size: 15px;
   font-weight: 500;
@@ -143,7 +148,7 @@ svg {
   width: 18px;
   height: 18px;
   place-items: center;
-  color: var(--orange);
+  color: var(--forest);
 }
 
 .pin-icon svg {
@@ -166,8 +171,8 @@ svg {
   place-items: center;
   border: 0;
   border-radius: 50%;
-  background: #fafafa;
-  color: #333;
+  background: var(--sand-soft);
+  color: var(--forest-dark);
   cursor: pointer;
 }
 
@@ -200,7 +205,7 @@ svg {
   gap: 10px;
   height: 50px;
   padding: 0 14px;
-  border: 1px solid #f0f0f0;
+  border: 1px solid var(--line);
   border-radius: 8px;
   background: #fff;
   color: #b1b1b1;
@@ -218,12 +223,12 @@ svg {
   border: 0;
   outline: 0;
   background: transparent;
-  color: #222;
+  color: var(--ink);
   font-size: 14px;
 }
 
 .search-box input::placeholder {
-  color: #acacac;
+  color: #8E948F;
 }
 
 .filter-button {
@@ -237,7 +242,7 @@ svg {
   background: var(--orange);
   color: #fff;
   cursor: pointer;
-  box-shadow: 0 8px 18px rgba(255, 122, 61, 0.24);
+  box-shadow: 0 8px 18px rgba(244, 123, 58, 0.24);
 }
 
 .filter-button svg {
@@ -257,13 +262,14 @@ svg {
   font-weight: 500;
   line-height: 1.18;
   letter-spacing: -0.035em;
+  color: var(--forest-dark);
 }
 
 .see-all-button {
   padding: 4px 0;
   border: 0;
   background: transparent;
-  color: #d28b63;
+  color: var(--orange);
   cursor: pointer;
   font-size: 13px;
   font-weight: 500;
@@ -286,8 +292,8 @@ svg {
 }
 
 .secondary-button {
-  background: #f5f5f5;
-  color: #333;
+  background: var(--sand-soft);
+  color: var(--forest-dark);
 }
 
 .bottom-nav {
@@ -302,7 +308,7 @@ svg {
   grid-template-columns: repeat(5, minmax(0, 1fr));
   margin: 0 auto;
   padding: 10px 10px calc(8px + env(safe-area-inset-bottom));
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--line);
   background: rgba(255, 255, 255, 0.97);
   box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.05);
   backdrop-filter: blur(14px);
@@ -319,7 +325,7 @@ svg {
   padding: 2px;
   border: 0;
   background: transparent;
-  color: #8d8d8d;
+  color: #818781;
   cursor: pointer;
   font-size: 10px;
   font-weight: 500;
@@ -332,7 +338,7 @@ svg {
 }
 
 .bottom-nav__item.is-active {
-  color: var(--orange);
+  color: var(--forest);
 }
 
 .cart-count {
@@ -422,7 +428,7 @@ svg {
 .chip {
   min-height: 36px;
   padding: 0 12px;
-  border: 1px solid #ececec;
+  border: 1px solid var(--line);
   border-radius: 999px;
   background: #fff;
   color: #777;
@@ -441,7 +447,7 @@ svg {
   gap: 16px;
   padding: 14px;
   border-radius: 10px;
-  background: #fafafa;
+  background: var(--sand-soft);
 }
 
 .toggle-row strong,
@@ -484,7 +490,7 @@ svg {
   margin: auto;
   padding: 11px 14px;
   border-radius: 10px;
-  background: #232323;
+  background: var(--forest-dark);
   color: #fff;
   font-size: 11px;
   font-weight: 600;
