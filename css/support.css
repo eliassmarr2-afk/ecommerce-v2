@@ -39,8 +39,7 @@
   height: 5px;
   overflow: hidden;
   border-radius: 999px;
-  background: #fff;
-  box-shadow: none;
+  background: var(--forest-soft);
 }
 
 .support-progress span {
@@ -217,8 +216,10 @@
   gap: 10px;
   margin-top: 18px;
   padding: 14px;
+  border: 0;
   border-radius: 16px;
-  background: var(--forest-soft);
+  background: #fff;
+  box-shadow: none;
 }
 
 .support-context-note__icon {
