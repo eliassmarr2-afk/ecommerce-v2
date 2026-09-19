@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F7F4EE" />
+  <meta name="description" content="Seguimiento de pedidos — The Camping." />
+  <title>Seguimiento · The Camping</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/base.css?v=20260919-1235" />
+  <link rel="stylesheet" href="css/tracking.css?v=20260919-1235" />
+</head>
+
+<body class="tracking-body">
+  <div class="tracking-shell">
+    <header class="tracking-topbar">
+      <a class="tracking-topbar__control" href="index.html" aria-label="Volver al inicio">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="m15 18-6-6 6-6"/>
+        </svg>
+      </a>
+
+      <span class="tracking-topbar__title">Seguimiento</span>
+
+      <button class="tracking-topbar__control" type="button" id="trackingMenuButton" aria-label="Más opciones">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="5" cy="12" r="1"/>
+          <circle cx="12" cy="12" r="1"/>
+          <circle cx="19" cy="12" r="1"/>
+        </svg>
+      </button>
+    </header>
+
+    <main class="tracking-main">
+      <section class="tracking-visual" aria-hidden="true">
+        <div class="tracking-visual__halo tracking-visual__halo--one"></div>
+        <div class="tracking-visual__halo tracking-visual__halo--two"></div>
+
+        <svg class="tracking-visual__package" viewBox="0 0 240 190">
+          <defs>
+            <linearGradient id="boxFront" x1="0" x2="1">
+              <stop offset="0" stop-color="#D99450"/>
+              <stop offset="1" stop-color="#C97E3C"/>
+            </linearGradient>
+            <linearGradient id="boxTop" x1="0" x2="1">
+              <stop offset="0" stop-color="#EFB16B"/>
+              <stop offset="1" stop-color="#DF9851"/>
+            </linearGradient>
+            <linearGradient id="boxSide" x1="0" x2="1">
+              <stop offset="0" stop-color="#B96E33"/>
+              <stop offset="1" stop-color="#A65F2B"/>
+            </linearGradient>
+          </defs>
+
+          <ellipse cx="112" cy="163" rx="72" ry="11" fill="#284735" opacity=".08"/>
+
+          <path d="M45 72 108 43l71 29-66 32-68-32Z" fill="url(#boxTop)"/>
+          <path d="M45 72v63l68 31v-62L45 72Z" fill="url(#boxFront)"/>
+          <path d="M113 104v62l66-32V72l-66 32Z" fill="url(#boxSide)"/>
+
+          <path d="m82 55 69 29" stroke="#F7E1C4" stroke-width="12" opacity=".85"/>
+          <path d="M110 45v59" stroke="#F7E1C4" stroke-width="10" opacity=".82"/>
+
+          <rect x="60" y="111" width="24" height="17" rx="2" fill="#284735" opacity=".13"/>
+          <path d="M65 117h14M65 121h10" stroke="#284735" stroke-width="2" opacity=".35"/>
+
+          <g transform="translate(143 81)">
+            <path d="M30 0C13.4 0 0 13.4 0 30c0 24 30 55 30 55s30-31 30-55C60 13.4 46.6 0 30 0Z" fill="#F47B3A"/>
+            <circle cx="30" cy="29" r="13" fill="#FFF"/>
+            <circle cx="30" cy="29" r="5" fill="#F7F4EE"/>
+          </g>
+
+          <g opacity=".8">
+            <ellipse cx="47" cy="48" rx="17" ry="7" fill="#E8EFEA"/>
+            <ellipse cx="61" cy="46" rx="12" ry="8" fill="#E8EFEA"/>
+            <ellipse cx="194" cy="43" rx="15" ry="7" fill="#E8EFEA"/>
+            <ellipse cx="205" cy="42" rx="10" ry="6" fill="#E8EFEA"/>
+          </g>
+        </svg>
+      </section>
+
+      <section class="tracking-copy">
+        <span class="tracking-copy__eyebrow">THE CAMPING</span>
+        <h1>Seguí tu pedido</h1>
+        <p>Ingresá tu ID de seguimiento para consultar el estado de tu compra.</p>
+      </section>
+
+      <form id="trackingForm" class="tracking-form" novalidate>
+        <label class="tracking-input">
+          <span class="tracking-input__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <path d="M3 6h11v11H3z"/>
+              <path d="M14 10h4l3 3v4h-7"/>
+              <circle cx="7" cy="18" r="2"/>
+              <circle cx="18" cy="18" r="2"/>
+            </svg>
+          </span>
+
+          <input
+            id="trackingIdInput"
+            name="trackingId"
+            type="text"
+            inputmode="text"
+            autocomplete="off"
+            autocapitalize="off"
+            spellcheck="false"
+            placeholder="Ingresá tu ID de seguimiento"
+            aria-describedby="trackingHelp trackingError"
+          />
+
+          <button class="tracking-input__action" type="button" id="pasteTrackingButton" aria-label="Pegar ID de seguimiento">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="7" y="5" width="12" height="15" rx="2"/>
+              <path d="M9 5V3h8v2"/>
+              <path d="M5 8H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2"/>
+            </svg>
+          </button>
+        </label>
+
+        <p id="trackingHelp" class="tracking-help">
+          Encontrás este código en el correo de confirmación de envío.
+        </p>
+
+        <p id="trackingError" class="tracking-error" role="alert" hidden>
+          Ingresá un ID de seguimiento para continuar.
+        </p>
+
+        <button class="tracking-submit" type="submit">
+          Consultar seguimiento
+        </button>
+      </form>
+
+      <div class="tracking-divider" aria-hidden="true">
+        <span></span>
+        <strong>o</strong>
+        <span></span>
+      </div>
+
+      <button class="tracking-qr" type="button" id="scanQrButton">
+        <span class="tracking-qr__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 8V4h4M16 4h4v4M20 16v4h-4M8 20H4v-4"/>
+            <path d="M8 8h3v3H8zM13 8h3v3h-3zM8 13h3v3H8zM14 14h2v2h-2z"/>
+          </svg>
+        </span>
+        <span>Escanear código QR</span>
+      </button>
+
+      <p class="tracking-privacy">
+        Tu código de seguimiento se utiliza únicamente para consultar el estado de tu pedido.
+      </p>
+    </main>
+
+    <div id="trackingToast" class="toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="js/tracking.js?v=20260919-1235"></script>
+</body>
+</html>
