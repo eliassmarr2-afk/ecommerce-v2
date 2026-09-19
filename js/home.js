@@ -375,6 +375,7 @@
     ]);
 
     renderCategories();
+    renderMenuCategories();
     renderProducts();
     updateCartCount();
     wireEvents();
