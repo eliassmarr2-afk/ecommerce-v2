@@ -46,9 +46,8 @@
     productSupportBackdrop: document.getElementById("productSupportBackdrop"),
     productSupportSheet: document.getElementById("productSupportSheet"),
     closeProductSupport: document.getElementById("closeProductSupport"),
-    closeProductSupportSuccess: document.getElementById("closeProductSupportSuccess"),
     productSupportFormView: document.getElementById("productSupportFormView"),
-    productSupportSuccessView: document.getElementById("productSupportSuccessView"),
+    productSupportChatView: document.getElementById("productSupportChatView"),
     productSupportForm: document.getElementById("productSupportForm"),
     productSupportName: document.getElementById("productSupportName"),
     productSupportEmail: document.getElementById("productSupportEmail"),
@@ -57,7 +56,11 @@
     supportProductImage: document.getElementById("supportProductImage"),
     supportProductTitle: document.getElementById("supportProductTitle"),
     supportProductPrice: document.getElementById("supportProductPrice"),
-    supportSuccessProductTitle: document.getElementById("supportSuccessProductTitle")
+    chatProductImage: document.getElementById("chatProductImage"),
+    chatProductTitle: document.getElementById("chatProductTitle"),
+    productSupportMessages: document.getElementById("productSupportMessages"),
+    productSupportMessageForm: document.getElementById("productSupportMessageForm"),
+    productSupportMessageInput: document.getElementById("productSupportMessageInput")
   };
 
   function showToast(message) {
@@ -136,7 +139,8 @@
     setProductSupportError(els.productSupportName, els.productSupportNameError, "");
     setProductSupportError(els.productSupportEmail, els.productSupportEmailError, "");
     els.productSupportFormView.hidden = false;
-    els.productSupportSuccessView.hidden = true;
+    els.productSupportChatView.hidden = true;
+    els.productSupportMessages.innerHTML = "";
   }
 
   function openProductSupport() {
@@ -146,7 +150,14 @@
     els.supportProductImage.alt = product.title;
     els.supportProductTitle.textContent = product.title;
     els.supportProductPrice.textContent = money.format(product.price);
-    els.supportSuccessProductTitle.textContent = product.title;
+    els.chatProductImage.src = product.image;
+    els.chatProductImage.alt = product.title;
+    els.chatProductTitle.textContent = product.title;
+
+    const storedSession = loadProductSupportSession();
+    if (storedSession) {
+      showProductSupportChat(storedSession);
+    }
 
     els.productSupportBackdrop.hidden = false;
     requestAnimationFrame(() => {
@@ -166,6 +177,145 @@
       }
     }, 190);
   }
+
+  function getProductSupportSessionKey() {
+    return `theCampingProductChat:${product.id}`;
+  }
+
+  function saveProductSupportSession(session) {
+    try {
+      sessionStorage.setItem(getProductSupportSessionKey(), JSON.stringify(session));
+    } catch {
+      // Front-only persistence is best effort.
+    }
+  }
+
+  function loadProductSupportSession() {
+    try {
+      const raw = sessionStorage.getItem(getProductSupportSessionKey());
+      if (!raw) return null;
+
+      const session = JSON.parse(raw);
+      if (!session || session.product?.id !== product.id) return null;
+      return session;
+    } catch {
+      return null;
+    }
+  }
+
+  function renderProductSupportMessages(session) {
+    els.productSupportMessages.innerHTML = session.messages.map((message) => {
+      const customer = message.role === "customer";
+      const sender = customer ? session.customer.name : "Operador";
+
+      return `
+        <div class="product-support-message ${customer ? "product-support-message--customer" : "product-support-message--operator"}">
+          <span class="product-support-message__sender">${sender}</span>
+          <div class="product-support-message__bubble"></div>
+        </div>
+      `;
+    }).join("");
+
+    const bubbles = els.productSupportMessages.querySelectorAll(".product-support-message__bubble");
+    session.messages.forEach((message, index) => {
+      if (bubbles[index]) {
+        bubbles[index].textContent = message.text;
+      }
+    });
+
+    els.productSupportMessages.scrollTop = els.productSupportMessages.scrollHeight;
+  }
+
+  function showProductSupportChat(session) {
+    els.productSupportFormView.hidden = true;
+    els.productSupportChatView.hidden = false;
+    els.chatProductImage.src = product.image;
+    els.chatProductImage.alt = product.title;
+    els.chatProductTitle.textContent = product.title;
+    renderProductSupportMessages(session);
+
+    requestAnimationFrame(() => {
+      els.productSupportMessageInput.focus();
+    });
+  }
+
+  function createProductSupportSession() {
+    const supportIntent = buildProductSupportIntent();
+    const firstName = supportIntent.customer.name.split(/\s+/)[0] || supportIntent.customer.name;
+
+    const session = {
+      version: 1,
+      type: "product_inquiry",
+      status: "open",
+      startedAt: new Date().toISOString(),
+      customer: supportIntent.customer,
+      product: supportIntent.product,
+      source: supportIntent.source,
+      entrySurface: supportIntent.entrySurface,
+      messages: [
+        {
+          role: "operator",
+          text: `Hola ${firstName}, ¿qué te gustaría saber de ${product.title}?`,
+          createdAt: new Date().toISOString()
+        }
+      ]
+    };
+
+    saveProductSupportSession(session);
+
+    window.dispatchEvent(new CustomEvent("thecamping:product-support-started", {
+      detail: JSON.parse(JSON.stringify(session))
+    }));
+
+    return session;
+  }
+
+  function sendProductSupportMessage(text) {
+    const normalized = String(text || "").trim();
+    if (!normalized) return;
+
+    const session = loadProductSupportSession();
+    if (!session) return;
+
+    const message = {
+      role: "customer",
+      text: normalized,
+      createdAt: new Date().toISOString()
+    };
+
+    session.messages.push(message);
+    saveProductSupportSession(session);
+    renderProductSupportMessages(session);
+
+    window.dispatchEvent(new CustomEvent("thecamping:product-support-message", {
+      detail: {
+        context: {
+          type: session.type,
+          customer: session.customer,
+          product: session.product,
+          source: session.source,
+          entrySurface: session.entrySurface
+        },
+        message: JSON.parse(JSON.stringify(message))
+      }
+    }));
+  }
+
+  window.TheCampingSupportHook = {
+    getCurrentContext() {
+      const session = loadProductSupportSession();
+      if (!session) return null;
+
+      return JSON.parse(JSON.stringify({
+        type: session.type,
+        status: session.status,
+        customer: session.customer,
+        product: session.product,
+        source: session.source,
+        entrySurface: session.entrySurface
+      }));
+    }
+  };
 
   function validateProductSupport() {
     const name = els.productSupportName.value.trim();
@@ -225,25 +375,30 @@
       return;
     }
 
-    const supportIntent = buildProductSupportIntent();
-
     /*
+     * Front-only V1:
+     * create the contextual chat immediately.
+     *
      * Future Protocol Data V2 seam:
-     * support.startContextualChat(supportIntent)
-     *
-     * Protocol Data will receive:
-     * - type = product_inquiry
-     * - customer name/email
-     * - exact product context
-     * - entry surface / source URL
-     *
-     * The backend must generate the opaque chat token and send the email.
-     * V1 deliberately performs no network call and creates no token.
+     * this exact session/context becomes the payload for the public
+     * Conversations endpoint. No network call is made yet.
      */
-    void supportIntent;
+    const session = createProductSupportSession();
+    showProductSupportChat(session);
+  }
 
-    els.productSupportFormView.hidden = true;
-    els.productSupportSuccessView.hidden = false;
+  function handleProductSupportMessageSubmit(event) {
+    event.preventDefault();
+
+    const text = els.productSupportMessageInput.value.trim();
+    if (!text) {
+      els.productSupportMessageInput.focus();
+      return;
+    }
+
+    sendProductSupportMessage(text);
+    els.productSupportMessageInput.value = "";
+    els.productSupportMessageInput.focus();
   }
 
   function wireEvents() {
@@ -301,7 +456,6 @@
     els.productSupportButton.addEventListener("click", openProductSupport);
 
     els.closeProductSupport.addEventListener("click", closeProductSupport);
-    els.closeProductSupportSuccess.addEventListener("click", closeProductSupport);
 
     els.productSupportBackdrop.addEventListener("click", (event) => {
       if (event.target === els.productSupportBackdrop) {
@@ -322,6 +476,7 @@
     });
 
     els.productSupportForm.addEventListener("submit", handleProductSupportSubmit);
+    els.productSupportMessageForm.addEventListener("submit", handleProductSupportMessageSubmit);
   }
 
   async function init() {
