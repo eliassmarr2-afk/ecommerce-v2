@@ -1024,11 +1024,14 @@
 /* PRODUCT SUPPORT EDGE HEADER V2 */
 .product-support-sheet {
   padding: 0 0 calc(24px + env(safe-area-inset-bottom));
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .product-support-product-header {
-  position: relative;
+  position: sticky;
+  z-index: 4;
+  top: 0;
   width: 100%;
   padding: 11px 22px 18px;
   border: 0;
