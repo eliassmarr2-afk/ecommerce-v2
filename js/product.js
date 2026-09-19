@@ -3,6 +3,7 @@
 
   const params = new URLSearchParams(window.location.search);
   const productId = params.get("id");
+  const ACTIVE_PRODUCT_CHAT_KEY = "theCampingActiveProductChat";
   let product;
 
   const money = new Intl.NumberFormat("es-AR", {
@@ -179,6 +180,11 @@
   function saveProductSupportSession(session) {
     try {
       sessionStorage.setItem(getProductSupportSessionKey(), JSON.stringify(session));
+      sessionStorage.setItem(ACTIVE_PRODUCT_CHAT_KEY, JSON.stringify({
+        productId: session.product.id,
+        productTitle: session.product.title,
+        sessionKey: getProductSupportSessionKey()
+      }));
     } catch {
       // Front-only persistence is best effort.
     }
@@ -305,6 +311,14 @@
         source: session.source,
         entrySurface: session.entrySurface
       }));
+    },
+
+    openCurrentConversation() {
+      const session = loadProductSupportSession();
+      if (!session) return false;
+
+      openProductSupport();
+      return true;
     }
   };
 
@@ -474,6 +488,10 @@
     product = await window.TheCampingCatalog.getProductById(productId);
     render();
     wireEvents();
+
+    if (params.get("supportChat") === "1" && loadProductSupportSession()) {
+      openProductSupport();
+    }
   }
 
   init();
