@@ -1,4 +1,9 @@
 :root {
+  --type-display: 44px;
+  --type-headline: 30px;
+  --type-title: 23px;
+  --type-body: 15px;
+  --type-label: 12px;
   --orange: #ff7a3d;
   --orange-dark: #f06c2f;
   --orange-soft: #fff1e8;
@@ -27,7 +32,7 @@ body {
   min-width: 320px;
   color: var(--ink);
   background: var(--page);
-  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Manrope", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -115,8 +120,8 @@ svg {
   display: block;
   margin-bottom: 4px;
   color: #a5a5a5;
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .location-button {
@@ -130,7 +135,7 @@ svg {
   color: #282828;
   cursor: pointer;
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .pin-icon {
@@ -214,7 +219,7 @@ svg {
   outline: 0;
   background: transparent;
   color: #222;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .search-box input::placeholder {
@@ -248,9 +253,10 @@ svg {
 .section-heading h2,
 .sheet-heading h2 {
   margin: 0;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.18;
+  letter-spacing: -0.035em;
 }
 
 .see-all-button {
@@ -259,8 +265,8 @@ svg {
   background: transparent;
   color: #d28b63;
   cursor: pointer;
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .primary-button,
@@ -270,8 +276,8 @@ svg {
   border: 0;
   border-radius: 10px;
   cursor: pointer;
-  font-size: 13px;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .primary-button {
@@ -315,7 +321,7 @@ svg {
   background: transparent;
   color: #8d8d8d;
   cursor: pointer;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: 500;
 }
 
