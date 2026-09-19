@@ -483,15 +483,18 @@
   }
 }
 
-/* PRODUCT / COMBO FLAT SURFACE CONTRACT */
-.product-body,
-.product-shell,
-.product-sheet {
+/* PRODUCT / COMBO SURFACE CONTRACT — restored approved continuous layout */
+.product-body {
   background: #ededed;
 }
 
 .product-shell {
+  background: #ffffff;
   box-shadow: none;
+}
+
+.product-sheet {
+  background: #ffffff;
 }
 
 .product-intro,
@@ -499,18 +502,18 @@
 .seller-section,
 .delivery-section,
 .features-section {
-  background: #ffffff;
+  background: transparent;
   border: 0;
-  border-radius: 18px;
+  border-radius: 0;
   box-shadow: none;
-  padding: 18px;
+  padding: 0;
 }
 
 .detail-section,
 .seller-section,
 .delivery-section,
 .features-section {
-  margin-top: 14px;
+  margin-top: 30px;
 }
 
 .seller-actions button,
@@ -526,7 +529,6 @@
   box-shadow: none;
   backdrop-filter: none;
 }
-
 
 /* PRODUCT SUPPORT SHEET */
 .product-support-backdrop {
