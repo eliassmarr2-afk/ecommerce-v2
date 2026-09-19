@@ -7,24 +7,57 @@
   function getActiveConversation() {
     try {
       const pointerRaw = sessionStorage.getItem(ACTIVE_CHAT_KEY);
-      if (!pointerRaw) return null;
 
-      const pointer = JSON.parse(pointerRaw);
-      if (!pointer || !pointer.productId) return null;
+      if (pointerRaw) {
+        const pointer = JSON.parse(pointerRaw);
 
-      const sessionRaw = sessionStorage.getItem(SESSION_PREFIX + pointer.productId);
-      if (!sessionRaw) {
-        sessionStorage.removeItem(ACTIVE_CHAT_KEY);
-        return null;
+        if (pointer?.productId) {
+          const sessionRaw = sessionStorage.getItem(SESSION_PREFIX + pointer.productId);
+
+          if (sessionRaw) {
+            const session = JSON.parse(sessionRaw);
+
+            if (session?.status === "open" && session.product?.id) {
+              return session;
+            }
+          }
+        }
       }
 
-      const session = JSON.parse(sessionRaw);
-      if (!session || session.status !== "open" || !session.product?.id) {
-        sessionStorage.removeItem(ACTIVE_CHAT_KEY);
-        return null;
+      // Backfill support for conversations created before the global pointer existed.
+      const candidates = [];
+
+      for (let index = 0; index < sessionStorage.length; index += 1) {
+        const key = sessionStorage.key(index);
+        if (!key || !key.startsWith(SESSION_PREFIX)) continue;
+
+        try {
+          const session = JSON.parse(sessionStorage.getItem(key) || "null");
+          if (session?.status === "open" && session.product?.id) {
+            candidates.push(session);
+          }
+        } catch {
+          // Ignore malformed front-only demo sessions.
+        }
       }
 
-      return session;
+      candidates.sort((a, b) => {
+        return new Date(b.startedAt || 0).getTime() - new Date(a.startedAt || 0).getTime();
+      });
+
+      const session = candidates[0] || null;
+
+      if (session) {
+        sessionStorage.setItem(ACTIVE_CHAT_KEY, JSON.stringify({
+          productId: session.product.id,
+          productTitle: session.product.title,
+          sessionKey: SESSION_PREFIX + session.product.id
+        }));
+        return session;
+      }
+
+      sessionStorage.removeItem(ACTIVE_CHAT_KEY);
+      return null;
     } catch {
       return null;
     }
