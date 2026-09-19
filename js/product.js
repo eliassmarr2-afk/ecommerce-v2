@@ -249,6 +249,7 @@
       product: supportIntent.product,
       source: supportIntent.source,
       entrySurface: supportIntent.entrySurface,
+      operatorUnreadCount: 0,
       messages: [
         {
           role: "operator",
