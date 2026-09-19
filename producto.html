@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/base.css?v=20260919-1648" />
-  <link rel="stylesheet" href="css/product.css?v=20260919-1648" />
+  <link rel="stylesheet" href="css/base.css?v=20260919-1710" />
+  <link rel="stylesheet" href="css/product.css?v=20260919-1710" />
 </head>
 <body class="product-body">
   <div class="product-shell">
@@ -128,30 +128,27 @@
         class="product-support-sheet"
         role="dialog"
         aria-modal="true"
-        aria-labelledby="productSupportTitle"
+        aria-label="Consulta sobre producto"
       >
-        <div class="product-support-sheet__handle" aria-hidden="true"></div>
+        <div class="product-support-product-header">
+          <div class="product-support-sheet__handle" aria-hidden="true"></div>
 
-        <div class="product-support-sheet__header">
-          <div>
-            <span class="product-support-sheet__eyebrow">SOPORTE CONTEXTUAL</span>
-            <h2 id="productSupportTitle">Consultar este producto</h2>
-          </div>
-
-          <button id="closeProductSupport" class="product-support-sheet__close" type="button" aria-label="Cerrar">
-            ×
-          </button>
-        </div>
-
-        <div id="productSupportFormView">
-          <div class="product-support-context">
+          <div class="product-support-product-header__row">
             <img id="supportProductImage" alt="" />
-            <div class="product-support-context__copy">
-              <span>Estás consultando por</span>
+
+            <div class="product-support-product-header__copy">
               <strong id="supportProductTitle">Producto</strong>
               <small id="supportProductPrice"></small>
             </div>
+
+            <button id="closeProductSupport" class="product-support-sheet__close" type="button" aria-label="Cerrar">
+              ×
+            </button>
           </div>
+        </div>
+
+        <div class="product-support-sheet__body">
+          <div id="productSupportFormView">
 
           <form id="productSupportForm" class="product-support-form" novalidate>
             <div class="product-support-field">
@@ -198,16 +195,8 @@
           </p>
         </div>
 
-        <div id="productSupportChatView" class="product-support-chat" hidden>
-          <div class="product-support-chat__context">
-            <img id="chatProductImage" alt="" />
-            <div>
-              <span>Consulta de producto</span>
-              <strong id="chatProductTitle">Producto</strong>
-            </div>
-          </div>
-
-          <div class="product-support-chat__notices">
+          <div id="productSupportChatView" class="product-support-chat" hidden>
+            <div class="product-support-chat__notices">
             <div class="product-support-chat__notice">
               <span class="product-support-chat__notice-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
@@ -241,6 +230,7 @@
             />
             <button type="submit">Enviar</button>
           </form>
+          </div>
         </div>
       </section>
     </div>
@@ -248,7 +238,7 @@
     <div id="toast" class="toast product-toast" role="status" aria-live="polite"></div>
   </div>
 
-  <script src="js/data/catalog.js?v=20260919-1648"></script>
-  <script src="js/product.js?v=20260919-1648"></script>
+  <script src="js/data/catalog.js?v=20260919-1710"></script>
+  <script src="js/product.js?v=20260919-1710"></script>
 </body>
 </html>
