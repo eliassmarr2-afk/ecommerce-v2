@@ -135,14 +135,9 @@
 
     if (initial.mode === "token-pending") {
       /*
-       * Keep the opaque token in memory only for this page lifecycle.
+       * V1 detects the token but does not persist, log or expose it.
        * A future adapter will exchange it for a public tracking projection.
        */
-      window.TheCampingTrackingAccess = Object.freeze({
-        mode: "token-pending",
-        token: access.token
-      });
-
       els.input.placeholder = "Preparando acceso de seguimiento…";
     }
   }
