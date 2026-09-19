@@ -26,7 +26,11 @@
     resetCategories: document.getElementById("resetCategories"),
     fastDeliveryFilter: document.getElementById("fastDeliveryFilter"),
     toast: document.getElementById("toast"),
-    cartCount: document.getElementById("cartCount")
+    cartCount: document.getElementById("cartCount"),
+    menuBackdrop: document.getElementById("homeMenu"),
+    openMenuButton: document.getElementById("openMenuButton"),
+    closeMenuButton: document.getElementById("closeMenuButton"),
+    menuCategories: document.getElementById("menuCategories")
   };
 
   const money = new Intl.NumberFormat("es-AR", {
@@ -82,6 +86,27 @@
     showToast.timer = window.setTimeout(() => {
       els.toast.classList.remove("is-visible");
     }, 2100);
+  }
+
+  function renderMenuCategories() {
+    els.menuCategories.innerHTML = state.categories.map((category) => `
+      <button type="button" data-menu-category="${category.id}">${category.label}</button>
+    `).join("");
+
+    els.menuCategories.querySelectorAll("[data-menu-category]").forEach((button) => {
+      button.addEventListener("click", () => {
+        state.category = button.dataset.menuCategory;
+        state.query = "";
+        els.searchInput.value = "";
+        renderCategories();
+        renderProducts();
+        closeMenu();
+        document.getElementById("featuredTitle").scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      });
+    });
   }
 
   function renderCategories() {
@@ -203,6 +228,27 @@
     els.emptyState.hidden = hasProducts;
   }
 
+  function openMenu() {
+    els.menuBackdrop.hidden = false;
+    requestAnimationFrame(() => {
+      els.menuBackdrop.classList.add("is-open");
+      els.openMenuButton.setAttribute("aria-expanded", "true");
+    });
+    document.body.classList.add("no-scroll");
+  }
+
+  function closeMenu() {
+    els.menuBackdrop.classList.remove("is-open");
+    els.openMenuButton.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("no-scroll");
+
+    window.setTimeout(() => {
+      if (!els.menuBackdrop.classList.contains("is-open")) {
+        els.menuBackdrop.hidden = true;
+      }
+    }, 190);
+  }
+
   function openFilters() {
     els.filterSheet.hidden = false;
     requestAnimationFrame(() => {
@@ -240,10 +286,26 @@
 
     syncPriceChips();
     renderCategories();
+    renderMenuCategories();
     renderProducts();
   }
 
   function wireEvents() {
+    els.openMenuButton.addEventListener("click", openMenu);
+    els.closeMenuButton.addEventListener("click", closeMenu);
+
+    els.menuBackdrop.addEventListener("click", (event) => {
+      if (event.target === els.menuBackdrop) {
+        closeMenu();
+      }
+    });
+
+    document.querySelectorAll("[data-menu-placeholder]").forEach((button) => {
+      button.addEventListener("click", () => {
+        showToast(`${button.dataset.menuPlaceholder}: se construirá en una próxima etapa.`);
+      });
+    });
+
     els.searchInput.addEventListener("input", (event) => {
       state.query = event.target.value;
       renderProducts();
