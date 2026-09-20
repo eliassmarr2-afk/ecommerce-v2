@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#ededed" />
+  <meta name="description" content="Carrito — The Camping." />
+  <title>Carrito · The Camping</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/base.css?v=20260920-1245" />
+  <link rel="stylesheet" href="css/cart.css?v=20260920-1245" />
+</head>
+<body class="cart-page">
+  <div class="cart-shell">
+    <header class="cart-header">
+      <a class="cart-back" href="index.html" aria-label="Volver">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 18-6-6 6-6"/></svg>
+      </a>
+
+      <div class="cart-heading">
+        <span>THE CAMPING</span>
+        <h1>Tu carrito</h1>
+      </div>
+
+      <span id="cartHeaderCount" class="cart-header-count" aria-label="Cantidad de productos">0</span>
+    </header>
+
+    <main class="cart-main">
+      <div id="cartItems" class="cart-list"></div>
+
+      <section id="cartEmpty" class="cart-empty" hidden>
+        <span class="cart-empty__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 7h14l-1 12H6L5 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+        </span>
+        <h2>Tu carrito está vacío</h2>
+        <p>Agregá productos o combos para encontrarlos acá.</p>
+        <a href="index.html">Explorar productos</a>
+      </section>
+    </main>
+
+    <aside id="cartCheckoutBar" class="cart-checkout">
+      <div class="cart-checkout__total">
+        <span>Total</span>
+        <strong id="cartTotal">$ 0</strong>
+      </div>
+      <button id="checkoutButton" type="button">Ir a pagar</button>
+    </aside>
+
+    <div id="cartToast" class="cart-toast" role="status" aria-live="polite"></div>
+  </div>
+
+  <script src="js/data/cart-store.js?v=20260920-1245"></script>
+  <script src="js/cart.js?v=20260920-1245"></script>
+  <script src="js/support-session-widget.js?v=20260920-1245"></script>
+</body>
+</html>
