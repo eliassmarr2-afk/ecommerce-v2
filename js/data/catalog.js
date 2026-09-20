@@ -35,6 +35,11 @@
       image: "https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=1200&q=82",
       description: "Un equipo inicial práctico para una escapada de dos personas. La selección combina refugio, descanso y cocina compacta en una sola compra.",
       features: ["Carpa para 2 personas", "2 sillas plegables", "Anafe portátil", "Bolso de guardado"],
+      supportQuestions: [
+        "¿La carpa es resistente al agua?",
+        "¿Qué incluye exactamente el combo?",
+        "¿Se puede comprar algún producto por separado?"
+      ],
       stock: 18
     },
     {
@@ -53,6 +58,11 @@
       image: "https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?auto=format&fit=crop&w=1200&q=82",
       description: "Carpa espaciosa para hasta cuatro personas, pensada para escapadas de fin de semana y campings organizados.",
       features: ["Capacidad para 4", "Doble techo", "Mosquitero frontal", "Bolso compacto"],
+      supportQuestions: [
+        "¿Es resistente al agua?",
+        "¿Cuánto tarda en armarse?",
+        "¿Cuántas personas entran cómodamente?"
+      ],
       stock: 9
     },
     {
@@ -71,6 +81,11 @@
       image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=1200&q=82",
       description: "Silla plegable de camping de armado instantáneo, liviana para transportar y firme para jornadas largas.",
       features: ["Estructura plegable", "Tela resistente", "Bolsa de transporte", "Apoyabrazos"],
+      supportQuestions: [
+        "¿Qué peso máximo soporta?",
+        "¿Qué medidas tiene plegada?",
+        "¿Es fácil de transportar?"
+      ],
       stock: 34
     },
     {
@@ -89,6 +104,11 @@
       image: "https://images.unsplash.com/photo-1526318472351-c75fcf070305?auto=format&fit=crop&w=1200&q=82",
       description: "Anafe portátil pensado para cocinar de forma simple durante una salida. Su formato compacto ocupa poco lugar en el equipo.",
       features: ["Encendido rápido", "Soporte estable", "Formato compacto", "Perilla de regulación"],
+      supportQuestions: [
+        "¿Qué tipo de cartucho utiliza?",
+        "¿Cuánto dura aproximadamente un cartucho?",
+        "¿Es apto para usar al aire libre?"
+      ],
       stock: 22
     },
     {
@@ -107,6 +127,11 @@
       image: "https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&w=1200&q=82",
       description: "Parrilla plegable para llevar en el baúl y montar junto al fogón. Diseñada para reducir volumen durante el traslado.",
       features: ["Acero reforzado", "Patas plegables", "Rejilla desmontable", "Fácil limpieza"],
+      supportQuestions: [
+        "¿Qué medidas tiene?",
+        "¿Cuánto pesa?",
+        "¿Se pliega completamente para transportarla?"
+      ],
       stock: 12
     },
     {
@@ -125,6 +150,11 @@
       image: "https://images.unsplash.com/photo-1514467911470-92d2c828d80b?auto=format&fit=crop&w=1200&q=82",
       description: "Kit inicial para pesca recreativa de río con los componentes esenciales reunidos en una sola selección.",
       features: ["Caña telescópica", "Reel frontal", "Línea inicial", "Set de accesorios"],
+      supportQuestions: [
+        "¿Qué incluye exactamente el kit?",
+        "¿Para qué tipo de pesca sirve?",
+        "¿La caña es telescópica?"
+      ],
       stock: 15
     },
     {
@@ -143,6 +173,11 @@
       image: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=82",
       description: "Colchón inflable doble para sumar confort sin ocupar demasiado espacio durante el traslado.",
       features: ["Doble plaza", "Válvula rápida", "Superficie aterciopelada", "Guardado compacto"],
+      supportQuestions: [
+        "¿Qué peso máximo soporta?",
+        "¿Cuánto tarda en inflarse?",
+        "¿Incluye inflador?"
+      ],
       stock: 27
     }
   ];
