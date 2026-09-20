@@ -72,18 +72,6 @@
     }, 2100);
   }
 
-  function getCart() {
-    try {
-      return JSON.parse(localStorage.getItem("theCampingCart") || "[]");
-    } catch {
-      return [];
-    }
-  }
-
-  function saveCart(cart) {
-    localStorage.setItem("theCampingCart", JSON.stringify(cart));
-  }
-
   function render() {
     document.title = `${product.title} · The Camping`;
     els.image.src = product.image;
@@ -108,22 +96,7 @@
   }
 
   function addToCart() {
-    const cart = getCart();
-    const existing = cart.find((item) => item.id === product.id);
-
-    if (existing) {
-      existing.quantity = Math.min((existing.quantity || 1) + 1, product.stock || 99);
-    } else {
-      cart.push({
-        id: product.id,
-        title: product.title,
-        price: product.price,
-        image: product.image,
-        quantity: 1
-      });
-    }
-
-    saveCart(cart);
+    window.TheCampingCart.add(product);
     showToast(`${product.title} agregado al carrito.`);
   }
 
