@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/base.css?v=20260919-1818" />
-  <link rel="stylesheet" href="css/home.css?v=20260919-1510" />
+  <link rel="stylesheet" href="css/home.css?v=20260920-1245" />
 </head>
 <body class="home-page">
   <div class="app-shell">
@@ -139,11 +139,11 @@
         <span>Novedades</span>
       </button>
 
-      <button class="bottom-nav__item cart-nav-item" type="button" data-placeholder-tab="Carrito">
+      <a class="bottom-nav__item cart-nav-item" href="carrito.html">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 7h14l-1 12H6L5 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
         <span>Carrito</span>
         <span class="cart-count" id="cartCount">0</span>
-      </button>
+      </a>
 
       <button class="bottom-nav__item" type="button" data-category-jump="combos">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v11H4z"/><path d="M8 8V5h8v3"/><path d="M9 13h6"/></svg>
@@ -195,8 +195,9 @@
 
   <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/data/catalog.js?v=20260919-1510"></script>
-  <script src="js/home.js?v=20260919-1510"></script>
+  <script src="js/data/catalog.js?v=20260920-1245"></script>
+  <script src="js/data/cart-store.js?v=20260920-1245"></script>
+  <script src="js/home.js?v=20260920-1245"></script>
   <script src="js/support-session-widget.js?v=20260919-1818"></script>
 </body>
 </html>
