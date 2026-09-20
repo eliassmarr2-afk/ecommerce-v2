@@ -1113,3 +1113,45 @@
     border-radius: 28px 28px 0 0;
   }
 }
+
+
+/* PRODUCT SUPPORT QUICK QUESTIONS */
+.product-support-quick-questions {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  margin: 4px 0 2px;
+  padding: 2px 0 8px;
+  scrollbar-width: none;
+  scroll-snap-type: x proximity;
+}
+
+.product-support-quick-questions[hidden] {
+  display: none !important;
+}
+
+.product-support-quick-questions::-webkit-scrollbar {
+  display: none;
+}
+
+.product-support-quick-question {
+  flex: 0 0 auto;
+  max-width: 255px;
+  min-height: 38px;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 14px;
+  background: #ffffff;
+  color: var(--forest-dark);
+  cursor: pointer;
+  box-shadow: none;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: left;
+  scroll-snap-align: start;
+}
+
+.product-support-quick-question:active {
+  transform: scale(.985);
+}
