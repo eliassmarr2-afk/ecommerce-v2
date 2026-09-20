@@ -74,7 +74,8 @@
       ".tracking-copy",
       ".route-card",
       ".support-heading",
-      ".auth-access-panel"
+      ".auth-access-panel",
+      ".cart-header"
     ];
 
     for (const selector of selectors) {
