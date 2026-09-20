@@ -58,6 +58,7 @@
     supportProductTitle: document.getElementById("supportProductTitle"),
     supportProductPrice: document.getElementById("supportProductPrice"),
     productSupportMessages: document.getElementById("productSupportMessages"),
+    productSupportQuickQuestions: document.getElementById("productSupportQuickQuestions"),
     productSupportMessageForm: document.getElementById("productSupportMessageForm"),
     productSupportMessageInput: document.getElementById("productSupportMessageInput")
   };
@@ -226,10 +227,39 @@
     els.productSupportMessages.scrollTop = els.productSupportMessages.scrollHeight;
   }
 
+  function renderProductSupportQuickQuestions() {
+    const questions = Array.isArray(product.supportQuestions)
+      ? product.supportQuestions.filter((question) => String(question || "").trim())
+      : [];
+
+    els.productSupportQuickQuestions.replaceChildren();
+
+    if (!questions.length) {
+      els.productSupportQuickQuestions.hidden = true;
+      return;
+    }
+
+    els.productSupportQuickQuestions.hidden = false;
+
+    questions.forEach((question) => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "product-support-quick-question";
+      button.textContent = question;
+
+      button.addEventListener("click", () => {
+        sendProductSupportMessage(question, "preset_question");
+      });
+
+      els.productSupportQuickQuestions.appendChild(button);
+    });
+  }
+
   function showProductSupportChat(session) {
     els.productSupportFormView.hidden = true;
     els.productSupportChatView.hidden = false;
     renderProductSupportMessages(session);
+    renderProductSupportQuickQuestions();
 
     requestAnimationFrame(() => {
       els.productSupportMessageInput.focus();
@@ -268,7 +298,7 @@
     return session;
   }
 
-  function sendProductSupportMessage(text) {
+  function sendProductSupportMessage(text, source = "composer") {
     const normalized = String(text || "").trim();
     if (!normalized) return;
 
@@ -278,6 +308,7 @@
     const message = {
       role: "customer",
       text: normalized,
+      source,
       createdAt: new Date().toISOString()
     };
 
@@ -366,7 +397,10 @@
         title: product.title,
         category: product.category,
         price: product.price,
-        image: product.image
+        image: product.image,
+        supportQuestions: Array.isArray(product.supportQuestions)
+          ? product.supportQuestions.slice()
+          : []
       },
       source: {
         url: window.location.href
@@ -402,7 +436,7 @@
       return;
     }
 
-    sendProductSupportMessage(text);
+    sendProductSupportMessage(text, "composer");
     els.productSupportMessageInput.value = "";
     els.productSupportMessageInput.focus();
   }
