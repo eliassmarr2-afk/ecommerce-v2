@@ -25,7 +25,12 @@
       price: Number(item?.price || 0),
       image: String(item?.image || ""),
       category: String(item?.category || ""),
-      type: item?.type === "combo" || item?.category === "combos" ? "combo" : "product",
+      type:
+        item?.type === "combo" ||
+        item?.category === "combos" ||
+        String(item?.id || "").startsWith("combo-")
+          ? "combo"
+          : "product",
       stock,
       quantity: Math.min(quantity, stock)
     };
