@@ -56,6 +56,10 @@
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>';
   }
 
+  function plusSvg() {
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>';
+  }
+
   function starSvg() {
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.7 5.5 6 .9-4.4 4.2 1 6-5.3-2.8-5.3 2.8 1-6-4.4-4.2 6-.9L12 3Z"/></svg>';
   }
@@ -64,18 +68,19 @@
     return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v11H3z"/><path d="M14 10h4l3 3v4h-7"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></svg>';
   }
 
-  function getCart() {
-    try {
-      return JSON.parse(localStorage.getItem("theCampingCart") || "[]");
-    } catch {
-      return [];
-    }
-  }
-
   function updateCartCount() {
-    const total = getCart().reduce((sum, item) => sum + (item.quantity || 1), 0);
+    const total = window.TheCampingCart.getCount();
     els.cartCount.textContent = String(total);
     els.cartCount.hidden = total === 0;
+  }
+
+  function addProductToCart(productId) {
+    const product = state.products.find((item) => item.id === productId);
+    if (!product) return;
+
+    window.TheCampingCart.add(product);
+    updateCartCount();
+    showToast(`${product.title} agregado al carrito.`);
   }
 
   function showToast(message) {
@@ -135,9 +140,10 @@
     const productUrl = `producto.html?id=${encodeURIComponent(product.id)}`;
 
     return `
-      <button
+      <article
         class="product-card"
-        type="button"
+        role="link"
+        tabindex="0"
         data-product-url="${productUrl}"
         aria-label="Abrir ${product.title}"
       >
@@ -161,30 +167,55 @@
               ${product.oldPrice ? `<small>${money.format(product.oldPrice)}</small>` : ""}
             </div>
 
-            <div class="card-proof" aria-label="${product.buyers} compradores">
-              <span class="avatar-stack" aria-hidden="true"><i></i><i></i><i></i></span>
-              <span class="proof-count">${product.buyers > 99 ? "99+" : product.buyers}</span>
+            <div class="product-card__right">
+              <div class="card-proof" aria-label="${product.buyers} compradores">
+                <span class="avatar-stack" aria-hidden="true"><i></i><i></i><i></i></span>
+                <span class="proof-count">${product.buyers > 99 ? "99+" : product.buyers}</span>
+              </div>
+
+              <button
+                class="card-add-button"
+                type="button"
+                data-add-cart="${product.id}"
+                aria-label="Agregar ${product.title} al carrito"
+              >${plusSvg()}</button>
             </div>
           </div>
         </div>
-      </button>
+      </article>
     `;
   }
 
   function nearbyCard(product) {
+    const productUrl = `producto.html?id=${encodeURIComponent(product.id)}`;
+
     return `
-      <a class="nearby-card" href="producto.html?id=${encodeURIComponent(product.id)}">
+      <article
+        class="nearby-card"
+        role="link"
+        tabindex="0"
+        data-product-url="${productUrl}"
+        aria-label="Abrir ${product.title}"
+      >
         <div class="nearby-card__media">
           <img src="${product.image}" alt="${product.title}" loading="lazy" />
           <span class="nearby-card__heart">${heartSvg()}</span>
         </div>
         <div class="nearby-card__body">
-          <span class="nearby-card__category">${product.badge}</span>
+          <span class="nearby-card__category">${product.category === "combos" ? "Combo" : "Producto"} · ${product.badge}</span>
           <span class="nearby-card__title">${product.title}</span>
           <span class="nearby-card__meta">${starSvg()} ${product.rating} · ${product.deliveryLabel}</span>
-          <strong class="nearby-card__price">${money.format(product.price)}</strong>
+          <div class="nearby-card__footer">
+            <strong class="nearby-card__price">${money.format(product.price)}</strong>
+            <button
+              class="card-add-button"
+              type="button"
+              data-add-cart="${product.id}"
+              aria-label="Agregar ${product.title} al carrito"
+            >${plusSvg()}</button>
+          </div>
         </div>
-      </a>
+      </article>
     `;
   }
 
@@ -215,9 +246,26 @@
     els.productsGrid.innerHTML = featured.map(productCard).join("");
     els.nearbyGrid.innerHTML = ranked.map(nearbyCard).join("");
 
-    els.productsGrid.querySelectorAll("[data-product-url]").forEach((card) => {
-      card.addEventListener("click", () => {
+    document.querySelectorAll("[data-product-url]").forEach((card) => {
+      card.addEventListener("click", (event) => {
+        if (event.target.closest("[data-add-cart]")) return;
         window.location.assign(card.dataset.productUrl);
+      });
+
+      card.addEventListener("keydown", (event) => {
+        if (event.target.closest("[data-add-cart]")) return;
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          window.location.assign(card.dataset.productUrl);
+        }
+      });
+    });
+
+    document.querySelectorAll("[data-add-cart]").forEach((button) => {
+      button.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        addProductToCart(button.dataset.addCart);
       });
     });
 
@@ -361,6 +409,8 @@
     renderProducts();
     updateCartCount();
     wireEvents();
+
+    window.addEventListener(window.TheCampingCart.eventName, updateCartCount);
 
     let mouseDown = false;
     let startX = 0;
