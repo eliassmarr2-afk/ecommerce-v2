@@ -73,7 +73,8 @@
       ".home-header",
       ".tracking-copy",
       ".route-card",
-      ".support-heading"
+      ".support-heading",
+      ".auth-access-panel"
     ];
 
     for (const selector of selectors) {
